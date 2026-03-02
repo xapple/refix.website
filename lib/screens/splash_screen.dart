@@ -17,6 +17,11 @@ class SplashScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text('find what fits', style: text.bodyLarge),
             const SizedBox(height: 24),
+            FilledButton.tonal(
+              onPressed: () => context.go('/fonts'),
+              child: const Text('View Font Palette'),
+            ),
+            const SizedBox(height: 12),
             FilledButton(
               onPressed: () => context.go('/colors'),
               child: const Text('View Color Palette'),
