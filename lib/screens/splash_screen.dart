@@ -26,48 +26,55 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: bg,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Material(
-            color: accent,
-            borderRadius: BorderRadius.circular(10),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(10),
-              onTap: () {},
-              child: Icon(Icons.menu, color: cs.onTertiary, size: 26),
-            ),
-          ),
-        ),
-        title: Image.asset('assets/images/logo.png', height: 40),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Material(
-              color: accent,
-              shape: const CircleBorder(),
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(Icons.person, color: cs.onTertiary, size: 26),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // App bar row (scrolls with content)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Material(
+                        color: accent,
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(6),
+                            child: Icon(Icons.menu, color: cs.onTertiary, size: 26),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    Image.asset('assets/images/logo.png', height: 40),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Material(
+                        color: accent,
+                        shape: const CircleBorder(),
+                        child: InkWell(
+                          customBorder: const CircleBorder(),
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(Icons.person, color: cs.onTertiary, size: 26),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -267,7 +274,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );
