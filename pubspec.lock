@@ -116,10 +116,9 @@ packages:
   device_wrapper:
     dependency: "direct main"
     description:
-      name: device_wrapper
-      sha256: "324c6ec39bf0432bf0b030392bcc4ebf3d0810aeb8453ce4da30a3f25e13e160"
-      url: "https://pub.dev"
-    source: hosted
+      path: "/Users/sinclair/repos/device_wrapper"
+      relative: false
+    source: path
     version: "1.2.1"
   fake_async:
     dependency: transitive

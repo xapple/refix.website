@@ -37,7 +37,8 @@ dependencies:
   google_fonts: ^8.0.2
   material_color_utilities: ^0.13.0
   flex_color_picker: ^3.6.0
-  device_wrapper: ^1.2.1
+  device_wrapper:
+    path: /Users/sinclair/repos/device_wrapper
 
 dev_dependencies:
   flutter_test:
