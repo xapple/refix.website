@@ -13,12 +13,9 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('refix', style: text.displayMedium?.copyWith(fontSize: 56)),
+            Text('refix', style: text.displayMedium),
             const SizedBox(height: 8),
-            Text(
-              'find what fits',
-              style: text.bodyLarge?.copyWith(fontSize: 16),
-            ),
+            Text('find what fits', style: text.bodyLarge),
             const SizedBox(height: 24),
             FilledButton(
               onPressed: () => context.go('/colors'),

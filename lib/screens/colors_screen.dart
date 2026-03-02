@@ -10,92 +10,79 @@ class ColorsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final corePalette = CorePalette.of(AppTheme.seedColor.toARGB32());
+    final primaryCore = CorePalette.of(AppTheme.primarySeed.toARGB32());
+    final secondaryCore = CorePalette.of(AppTheme.secondarySeed.toARGB32());
+    final tertiaryCore = CorePalette.of(AppTheme.tertiarySeed.toARGB32());
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        title: Text('Color Palette', style: textTheme.headlineSmall),
+        title: const Text('Color Palette'),
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
+          constraints: const BoxConstraints(maxWidth: 1400),
           child: ListView(
             padding: const EdgeInsets.all(24),
             children: [
               Text(
-                'Seed Color',
-                style: textTheme.headlineMedium?.copyWith(
-                  color: colorScheme.primary,
-                ),
+                'Theme Seed Colors',
+                style: textTheme.headlineMedium,
               ),
               const SizedBox(height: 8),
               Text(
-                'The app theme is generated from one seed color using Material 3.',
-                style: textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
+                'The app theme uses three configurable seeds: primary, secondary, and tertiary.',
+                style: textTheme.bodyLarge,
               ),
               const SizedBox(height: 16),
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
                 children: [
-                  const SeedChip(name: 'App Seed', color: AppTheme.seedColor),
+                  const SeedChip(name: 'Primary', color: AppTheme.primarySeed),
+                  const SeedChip(
+                    name: 'Secondary',
+                    color: AppTheme.secondarySeed,
+                  ),
+                  const SeedChip(
+                    name: 'Tertiary',
+                    color: AppTheme.tertiarySeed,
+                  ),
                 ],
               ),
               const SizedBox(height: 40),
               Text(
                 'Generated Tonal Palettes (0-100)',
-                style: textTheme.headlineSmall?.copyWith(
-                  color: colorScheme.primary,
-                ),
+                style: textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
               Text(
-                'These are the generated Material tonal palettes from the app seed.',
-                style: textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
+                'These are generated from your three theme seeds.',
+                style: textTheme.bodyLarge,
               ),
               const SizedBox(height: 24),
               PaletteStrip(
-                label: 'Primary tones',
-                swatches: tonalSwatches(corePalette.primary),
+                label: 'Primary seed tones',
+                swatches: tonalSwatches(primaryCore.primary),
               ),
               const SizedBox(height: 20),
               PaletteStrip(
-                label: 'Secondary tones',
-                swatches: tonalSwatches(corePalette.secondary),
+                label: 'Secondary seed tones',
+                swatches: tonalSwatches(secondaryCore.primary),
               ),
               const SizedBox(height: 20),
               PaletteStrip(
-                label: 'Tertiary tones',
-                swatches: tonalSwatches(corePalette.tertiary),
-              ),
-              const SizedBox(height: 20),
-              PaletteStrip(
-                label: 'Neutral tones',
-                swatches: tonalSwatches(corePalette.neutral),
-              ),
-              const SizedBox(height: 20),
-              PaletteStrip(
-                label: 'Neutral variant tones',
-                swatches: tonalSwatches(corePalette.neutralVariant),
+                label: 'Tertiary seed tones',
+                swatches: tonalSwatches(tertiaryCore.primary),
               ),
               const SizedBox(height: 20),
               Text(
                 'Active Theme ColorScheme Roles',
-                style: textTheme.headlineSmall?.copyWith(
-                  color: colorScheme.primary,
-                ),
+                style: textTheme.headlineSmall,
               ),
               const SizedBox(height: 8),
               Text(
                 'These are the colors currently exposed by ThemeData.colorScheme.',
-                style: textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.8),
-                ),
+                style: textTheme.bodyLarge,
               ),
               const SizedBox(height: 20),
               Wrap(
@@ -145,13 +132,12 @@ class PaletteStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final onSurface = Theme.of(context).colorScheme.onSurface;
     final textTheme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: textTheme.titleMedium?.copyWith(color: onSurface)),
+        Text(label, style: textTheme.titleMedium),
         const SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
