@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:web_color_picker/web_color_picker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
@@ -151,41 +151,58 @@ class _ColorPickerCard extends StatelessWidget {
     final tt = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      width: 200,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colorScheme.outlineVariant),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          WebColorPicker.builder(
-            initialColor: color,
-            builder: (context, selectedColor) =>
-                Container(height: 100, color: selectedColor),
-            onInput: (c, _) => onChanged(c),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(label, style: tt.titleSmall),
-                const SizedBox(height: 4),
-                Text(
-                  _hex(color),
-                  style: GoogleFonts.robotoMono(
-                    fontSize: 12,
-                    color: colorScheme.outline,
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      onTap: () async {
+        await ColorPicker(
+          color: color,
+          onColorChanged: onChanged,
+          title: Text(label, style: tt.titleMedium),
+          pickersEnabled: const {
+            ColorPickerType.primary: false,
+            ColorPickerType.accent: false,
+            ColorPickerType.wheel: true,
+          },
+          enableShadesSelection: false,
+          showColorCode: true,
+          colorCodeHasColor: true,
+        ).showPickerDialog(context);
+      },
+      child: Container(
+        width: 200,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: colorScheme.outlineVariant),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              color: color,
+              alignment: Alignment.center,
+              child: Icon(Icons.colorize, color: color.computeLuminance() > 0.5 ? Colors.black54 : Colors.white54),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: tt.titleSmall),
+                  const SizedBox(height: 4),
+                  Text(
+                    _hex(color),
+                    style: GoogleFonts.robotoMono(
+                      fontSize: 12,
+                      color: colorScheme.outline,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
