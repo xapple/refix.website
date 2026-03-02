@@ -1,14 +1,31 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-/// App typography: one title font + one body font.
 class AppFonts {
   AppFonts._();
 
-  static const String titleFont = 'Averia Serif Libre';
-  static const String bodyFont = 'Barlow';
+  static const String defaultTitleFont = 'Averia Serif Libre';
+  static const String defaultBodyFont  = 'Barlow';
 
-  static TextTheme get textTheme {
+  static const List<String> titleFonts = [
+    'Averia Serif Libre',
+    'Playfair Display',
+    'Cormorant Garamond',
+    'EB Garamond',
+    'Merriweather',
+    'Lora',
+  ];
+
+  static const List<String> bodyFonts = [
+    'Barlow',
+    'Lato',
+    'Inter',
+    'Roboto',
+    'Open Sans',
+    'Nunito',
+  ];
+
+  static TextTheme buildTextTheme(String titleFont, String bodyFont) {
     final base = ThemeData.light().textTheme;
 
     TextStyle? titleStyle(TextStyle? style) =>

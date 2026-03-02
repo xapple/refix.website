@@ -1,48 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'app_fonts.dart';
+import '../providers/color_providers.dart';
+import '../providers/font_providers.dart';
 
-class AppTheme {
-  AppTheme._();
+/// Derived provider — watches all theme state and returns both ThemeData variants.
+final appThemeProvider = Provider<({ThemeData light, ThemeData dark})>((ref) {
+  final primary   = ref.watch(primaryColorProvider);
+  final secondary = ref.watch(secondaryColorProvider);
+  final tertiary  = ref.watch(tertiaryColorProvider);
+  final titleFont = ref.watch(titleFontProvider);
+  final bodyFont  = ref.watch(bodyFontProvider);
 
-  static const Color primarySeed = Color(0xFFE07030);   // warm orange/terracotta
-  static const Color secondarySeed = Color(0xFFA05520); // warm amber/brown
-  static const Color tertiarySeed = Color(0xFFC03040);  // rose/crimson
+  return (
+    light: _build(Brightness.light, primary, secondary, tertiary, titleFont, bodyFont),
+    dark:  _build(Brightness.dark,  primary, secondary, tertiary, titleFont, bodyFont),
+  );
+});
 
-  static ColorScheme _buildScheme(Brightness brightness) {
-    final primary = ColorScheme.fromSeed(
-      seedColor: primarySeed,
-      brightness: brightness,
-    );
-    final secondary = ColorScheme.fromSeed(
-      seedColor: secondarySeed,
-      brightness: brightness,
-    );
-    final tertiary = ColorScheme.fromSeed(
-      seedColor: tertiarySeed,
-      brightness: brightness,
-    );
+ThemeData _build(
+  Brightness brightness,
+  Color primary,
+  Color secondary,
+  Color tertiary,
+  String titleFont,
+  String bodyFont,
+) {
+  final primaryScheme   = ColorScheme.fromSeed(seedColor: primary,   brightness: brightness);
+  final secondaryScheme = ColorScheme.fromSeed(seedColor: secondary, brightness: brightness);
+  final tertiaryScheme  = ColorScheme.fromSeed(seedColor: tertiary,  brightness: brightness);
 
-    return primary.copyWith(
-      secondary: secondary.primary,
-      onSecondary: secondary.onPrimary,
-      secondaryContainer: secondary.primaryContainer,
-      onSecondaryContainer: secondary.onPrimaryContainer,
-      tertiary: tertiary.primary,
-      onTertiary: tertiary.onPrimary,
-      tertiaryContainer: tertiary.primaryContainer,
-      onTertiaryContainer: tertiary.onPrimaryContainer,
-    );
-  }
-
-  static ThemeData light() => ThemeData(
-    useMaterial3: true,
-    colorScheme: _buildScheme(Brightness.light),
-    textTheme: AppFonts.textTheme,
+  final colorScheme = primaryScheme.copyWith(
+    secondary:            secondaryScheme.primary,
+    onSecondary:          secondaryScheme.onPrimary,
+    secondaryContainer:   secondaryScheme.primaryContainer,
+    onSecondaryContainer: secondaryScheme.onPrimaryContainer,
+    tertiary:             tertiaryScheme.primary,
+    onTertiary:           tertiaryScheme.onPrimary,
+    tertiaryContainer:    tertiaryScheme.primaryContainer,
+    onTertiaryContainer:  tertiaryScheme.onPrimaryContainer,
   );
 
-  static ThemeData dark() => ThemeData(
+  return ThemeData(
     useMaterial3: true,
-    colorScheme: _buildScheme(Brightness.dark),
-    textTheme: AppFonts.textTheme,
+    colorScheme:  colorScheme,
+    textTheme:    AppFonts.buildTextTheme(titleFont, bodyFont),
   );
 }
