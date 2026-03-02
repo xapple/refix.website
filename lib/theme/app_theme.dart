@@ -1,31 +1,48 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
 import 'app_fonts.dart';
 
 class AppTheme {
   AppTheme._();
 
-  static ThemeData get light => ThemeData(
+  static const Color primarySeed = Color(0xFF4F46E5);
+  static const Color secondarySeed = Color(0xFF64748B);
+  static const Color tertiarySeed = Color(0xFF0EA5E9);
+
+  static ColorScheme _buildScheme(Brightness brightness) {
+    final primary = ColorScheme.fromSeed(
+      seedColor: primarySeed,
+      brightness: brightness,
+    );
+    final secondary = ColorScheme.fromSeed(
+      seedColor: secondarySeed,
+      brightness: brightness,
+    );
+    final tertiary = ColorScheme.fromSeed(
+      seedColor: tertiarySeed,
+      brightness: brightness,
+    );
+
+    return primary.copyWith(
+      secondary: secondary.primary,
+      onSecondary: secondary.onPrimary,
+      secondaryContainer: secondary.primaryContainer,
+      onSecondaryContainer: secondary.onPrimaryContainer,
+      tertiary: tertiary.primary,
+      onTertiary: tertiary.onPrimary,
+      tertiaryContainer: tertiary.primaryContainer,
+      onTertiaryContainer: tertiary.onPrimaryContainer,
+    );
+  }
+
+  static ThemeData light() => ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppPrimary.shade600,
-          primary: AppPrimary.shade600,
-          primaryContainer: AppPrimary.shade100,
-          secondary: AppSecondary.shade500,
-          secondaryContainer: AppSecondary.shade100,
-          tertiary: AppAccent.shade500,
-          tertiaryContainer: AppAccent.shade100,
-          surface: AppSecondary.shade50,
-          onPrimary: Colors.white,
-          onSecondary: Colors.white,
-          brightness: Brightness.light,
-        ),
+        colorScheme: _buildScheme(Brightness.light),
         textTheme: AppFonts.textTheme,
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppPrimary.shade600,
-          foregroundColor: Colors.white,
-          titleTextStyle: AppFonts.title(fontSize: 20, color: Colors.white),
-          elevation: 0,
-        ),
+      );
+
+  static ThemeData dark() => ThemeData(
+        useMaterial3: true,
+        colorScheme: _buildScheme(Brightness.dark),
+        textTheme: AppFonts.textTheme,
       );
 }

@@ -6,6 +6,16 @@ See the live version here:
 
 # https://refix.website
 
+
+## Colors
+
+Interesting links to define the color scheme of the app:
+
+* https://rydmike.com/flexcolorscheme/themesplayground-latest/
+* https://material-foundation.github.io/material-theme-builder/
+* https://m3.material.io/styles/color/advanced/define-new-colors
+
+
 ## Instructions
 
 ### First step

@@ -15,7 +15,9 @@ class RefixApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Refix',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
       routerConfig: appRouter,
     );
   }
