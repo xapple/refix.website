@@ -122,8 +122,6 @@ class _FontPickerCard extends StatelessWidget {
   final String selected;
   final ValueChanged<String> onChanged;
 
-  static const String _preview = 'The quick brown fox';
-
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
@@ -140,7 +138,7 @@ class _FontPickerCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: tt.titleMedium),
+          Text(label, style: tt.bodyLarge),
           const SizedBox(height: 12),
           DecoratedBox(
             decoration: BoxDecoration(
@@ -166,11 +164,6 @@ class _FontPickerCard extends StatelessWidget {
                 },
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            _preview,
-            style: GoogleFonts.getFont(selected, textStyle: tt.headlineSmall),
           ),
         ],
       ),

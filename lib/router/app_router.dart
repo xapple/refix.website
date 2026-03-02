@@ -9,6 +9,5 @@ final appRouter = GoRouter(
     GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
     GoRoute(path: '/fonts', builder: (context, state) => const FontsScreen()),
     GoRoute(path: '/colors', builder: (context, state) => const ColorsScreen()),
-    // TODO: add /login, /register, /search, /detail/:id, /profile
   ],
 );
