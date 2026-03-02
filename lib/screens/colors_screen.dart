@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:web_color_picker/web_color_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
@@ -162,9 +162,11 @@ class _ColorPickerCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: () => _showPicker(context),
-            child: Container(height: 100, color: color),
+          WebColorPicker.builder(
+            initialColor: color,
+            builder: (context, selectedColor) =>
+                Container(height: 100, color: selectedColor),
+            onInput: (c, _) => onChanged(c),
           ),
           Padding(
             padding: const EdgeInsets.all(12),
@@ -185,65 +187,6 @@ class _ColorPickerCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  void _showPicker(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => _ColorPickerDialog(
-        label: label,
-        initial: color,
-        onChanged: onChanged,
-      ),
-    );
-  }
-}
-
-class _ColorPickerDialog extends StatefulWidget {
-  const _ColorPickerDialog({
-    required this.label,
-    required this.initial,
-    required this.onChanged,
-  });
-
-  final String label;
-  final Color initial;
-  final ValueChanged<Color> onChanged;
-
-  @override
-  State<_ColorPickerDialog> createState() => _ColorPickerDialogState();
-}
-
-class _ColorPickerDialogState extends State<_ColorPickerDialog> {
-  late Color _color;
-
-  @override
-  void initState() {
-    super.initState();
-    _color = widget.initial;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('${widget.label} color'),
-      content: SingleChildScrollView(
-        child: ColorPicker(
-          pickerColor: _color,
-          onColorChanged: (color) {
-            setState(() => _color = color);
-            widget.onChanged(color);
-          },
-          enableAlpha: false,
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Done'),
-        ),
-      ],
     );
   }
 }
