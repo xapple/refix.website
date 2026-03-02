@@ -5,7 +5,7 @@ class AppFonts {
   AppFonts._();
 
   static const String defaultTitleFont = 'Averia Serif Libre';
-  static const String defaultBodyFont  = 'Barlow';
+  static const String defaultBodyFont = 'Barlow';
 
   static const List<String> titleFonts = [
     'Averia Serif Libre',
@@ -34,21 +34,21 @@ class AppFonts {
         GoogleFonts.getFont(bodyFont, textStyle: style);
 
     return base.copyWith(
-      displayLarge:   titleStyle(base.displayLarge),
-      displayMedium:  titleStyle(base.displayMedium),
-      displaySmall:   titleStyle(base.displaySmall),
-      headlineLarge:  titleStyle(base.headlineLarge),
+      displayLarge: titleStyle(base.displayLarge),
+      displayMedium: titleStyle(base.displayMedium),
+      displaySmall: titleStyle(base.displaySmall),
+      headlineLarge: titleStyle(base.headlineLarge),
       headlineMedium: titleStyle(base.headlineMedium),
-      headlineSmall:  titleStyle(base.headlineSmall),
-      titleLarge:     titleStyle(base.titleLarge),
-      titleMedium:    titleStyle(base.titleMedium),
-      titleSmall:     titleStyle(base.titleSmall),
-      bodyLarge:      bodyStyle(base.bodyLarge),
-      bodyMedium:     bodyStyle(base.bodyMedium),
-      bodySmall:      bodyStyle(base.bodySmall),
-      labelLarge:     bodyStyle(base.labelLarge),
-      labelMedium:    bodyStyle(base.labelMedium),
-      labelSmall:     bodyStyle(base.labelSmall),
+      headlineSmall: titleStyle(base.headlineSmall),
+      titleLarge: titleStyle(base.titleLarge),
+      titleMedium: titleStyle(base.titleMedium),
+      titleSmall: titleStyle(base.titleSmall),
+      bodyLarge: bodyStyle(base.bodyLarge),
+      bodyMedium: bodyStyle(base.bodyMedium),
+      bodySmall: bodyStyle(base.bodySmall),
+      labelLarge: bodyStyle(base.labelLarge),
+      labelMedium: bodyStyle(base.labelMedium),
+      labelSmall: bodyStyle(base.labelSmall),
     );
   }
 }

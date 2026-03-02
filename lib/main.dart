@@ -18,9 +18,9 @@ class RefixApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Refix',
       debugShowCheckedModeBanner: false,
-      theme:      themes.light,
-      darkTheme:  themes.dark,
-      themeMode:  ThemeMode.system,
+      theme: themes.light,
+      darkTheme: themes.dark,
+      themeMode: ThemeMode.system,
       routerConfig: appRouter,
     );
   }

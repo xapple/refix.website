@@ -12,25 +12,25 @@ class FontsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tt      = Theme.of(context).textTheme;
+    final tt = Theme.of(context).textTheme;
     final outline = Theme.of(context).colorScheme.outline;
 
     final styles = [
-      (tt.displayLarge,   'displayLarge'),
-      (tt.displayMedium,  'displayMedium'),
-      (tt.displaySmall,   'displaySmall'),
-      (tt.headlineLarge,  'headlineLarge'),
+      (tt.displayLarge, 'displayLarge'),
+      (tt.displayMedium, 'displayMedium'),
+      (tt.displaySmall, 'displaySmall'),
+      (tt.headlineLarge, 'headlineLarge'),
       (tt.headlineMedium, 'headlineMedium'),
-      (tt.headlineSmall,  'headlineSmall'),
-      (tt.titleLarge,     'titleLarge'),
-      (tt.titleMedium,    'titleMedium'),
-      (tt.titleSmall,     'titleSmall'),
-      (tt.bodyLarge,      'bodyLarge'),
-      (tt.bodyMedium,     'bodyMedium'),
-      (tt.bodySmall,      'bodySmall'),
-      (tt.labelLarge,     'labelLarge'),
-      (tt.labelMedium,    'labelMedium'),
-      (tt.labelSmall,     'labelSmall'),
+      (tt.headlineSmall, 'headlineSmall'),
+      (tt.titleLarge, 'titleLarge'),
+      (tt.titleMedium, 'titleMedium'),
+      (tt.titleSmall, 'titleSmall'),
+      (tt.bodyLarge, 'bodyLarge'),
+      (tt.bodyMedium, 'bodyMedium'),
+      (tt.bodySmall, 'bodySmall'),
+      (tt.labelLarge, 'labelLarge'),
+      (tt.labelMedium, 'labelMedium'),
+      (tt.labelSmall, 'labelSmall'),
     ];
 
     return Scaffold(
@@ -54,7 +54,10 @@ class FontsScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         name,
-                        style: GoogleFonts.robotoMono(fontSize: 11, color: outline),
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 11,
+                          color: outline,
+                        ),
                       ),
                     ],
                   ),
@@ -68,29 +71,36 @@ class FontsScreen extends StatelessWidget {
   }
 }
 
-class _FontPickerSection extends StatelessWidget {
+// ── Font picker section ──────────────────────────────────────────────────────
+
+class _FontPickerSection extends ConsumerWidget {
   const _FontPickerSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Theme Font Families', style: Theme.of(context).textTheme.headlineMedium),
+        Text(
+          'Theme Font Families',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         const SizedBox(height: 16),
         Wrap(
           spacing: 16,
           runSpacing: 16,
           children: [
             _FontPickerCard(
-              label:    'Title font',
-              fonts:    AppFonts.titleFonts,
-              provider: titleFontProvider,
+              label: 'Title font',
+              fonts: AppFonts.titleFonts,
+              selected: ref.watch(titleFontProvider),
+              onChanged: (f) => ref.read(titleFontProvider.notifier).set(f),
             ),
             _FontPickerCard(
-              label:    'Body font',
-              fonts:    AppFonts.bodyFonts,
-              provider: bodyFontProvider,
+              label: 'Body font',
+              fonts: AppFonts.bodyFonts,
+              selected: ref.watch(bodyFontProvider),
+              onChanged: (f) => ref.read(bodyFontProvider.notifier).set(f),
             ),
           ],
         ),
@@ -99,23 +109,24 @@ class _FontPickerSection extends StatelessWidget {
   }
 }
 
-class _FontPickerCard extends ConsumerWidget {
+class _FontPickerCard extends StatelessWidget {
   const _FontPickerCard({
     required this.label,
     required this.fonts,
-    required this.provider,
+    required this.selected,
+    required this.onChanged,
   });
 
-  final String             label;
-  final List<String>       fonts;
-  final StateProvider<String> provider;
+  final String label;
+  final List<String> fonts;
+  final String selected;
+  final ValueChanged<String> onChanged;
 
   static const String _preview = 'The quick brown fox';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final selected    = ref.watch(provider);
-    final tt          = Theme.of(context).textTheme;
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
@@ -131,22 +142,30 @@ class _FontPickerCard extends ConsumerWidget {
         children: [
           Text(label, style: tt.titleMedium),
           const SizedBox(height: 12),
-          DropdownButtonFormField<String>(
-            value: selected,
-            isExpanded: true,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: colorScheme.outline),
+              borderRadius: BorderRadius.circular(4),
             ),
-            items: fonts
-                .map((f) => DropdownMenuItem(
-                      value: f,
-                      child: Text(f, style: GoogleFonts.getFont(f)),
-                    ))
-                .toList(),
-            onChanged: (value) {
-              if (value != null) ref.read(provider.notifier).state = value;
-            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: DropdownButton<String>(
+                value: selected,
+                isExpanded: true,
+                underline: const SizedBox(),
+                items: fonts
+                    .map(
+                      (f) => DropdownMenuItem(
+                        value: f,
+                        child: Text(f, style: GoogleFonts.getFont(f)),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) onChanged(value);
+                },
+              ),
+            ),
           ),
           const SizedBox(height: 16),
           Text(
