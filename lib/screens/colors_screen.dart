@@ -10,9 +10,21 @@ class ColorsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
-    final primaryCore = CorePalette.of(AppTheme.primarySeed.toARGB32());
-    final secondaryCore = CorePalette.of(AppTheme.secondarySeed.toARGB32());
-    final tertiaryCore = CorePalette.of(AppTheme.tertiarySeed.toARGB32());
+    final primaryScheme = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(AppTheme.primarySeed.toARGB32()),
+      isDark: false,
+      contrastLevel: 0,
+    );
+    final secondaryScheme = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(AppTheme.secondarySeed.toARGB32()),
+      isDark: false,
+      contrastLevel: 0,
+    );
+    final tertiaryScheme = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(AppTheme.tertiarySeed.toARGB32()),
+      isDark: false,
+      contrastLevel: 0,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -61,20 +73,20 @@ class ColorsScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               PaletteStrip(
-                label: 'Primary seed tones',
-                swatches: tonalSwatches(primaryCore.primary),
+                label: 'Primary',
+                swatches: tonalSwatches(primaryScheme.primaryPalette),
               ),
               const SizedBox(height: 20),
               PaletteStrip(
-                label: 'Secondary seed tones',
-                swatches: tonalSwatches(secondaryCore.primary),
+                label: 'Secondary',
+                swatches: tonalSwatches(secondaryScheme.primaryPalette),
               ),
               const SizedBox(height: 20),
               PaletteStrip(
-                label: 'Tertiary seed tones',
-                swatches: tonalSwatches(tertiaryCore.primary),
+                label: 'Tertiary',
+                swatches: tonalSwatches(tertiaryScheme.primaryPalette),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 40),
               Text(
                 'Active Theme ColorScheme Roles',
                 style: textTheme.headlineSmall,

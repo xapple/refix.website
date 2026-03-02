@@ -4,9 +4,9 @@ import 'app_fonts.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color primarySeed = Color(0xFF2F4F73);
-  static const Color secondarySeed = Color(0xFF6B7785);
-  static const Color tertiarySeed = Color(0xFF9B6F4A);
+  static const Color primarySeed = Color(0xFFE07030);   // warm orange/terracotta
+  static const Color secondarySeed = Color(0xFFA05520); // warm amber/brown
+  static const Color tertiarySeed = Color(0xFFC03040);  // rose/crimson
 
   static ColorScheme _buildScheme(Brightness brightness) {
     final primary = ColorScheme.fromSeed(

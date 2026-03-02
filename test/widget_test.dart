@@ -7,6 +7,7 @@ void main() {
   testWidgets('App smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(const ProviderScope(child: RefixApp()));
     expect(find.byType(MaterialApp), findsOneWidget);
+    expect(find.text('View Font Palette'), findsOneWidget);
     expect(find.text('View Color Palette'), findsOneWidget);
   });
 }
