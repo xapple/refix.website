@@ -33,3 +33,21 @@ Data: Fake/hardcoded data in Dart files, no backend.
 * Form validation on login/registration using TextFormField validators.
 * Maybe try "Widgetbook" to see all the separate components
 * Integrate a way to implement i18n for the components, probably using "slang"
+
+# Coding standards.
+
+When making list like this one:
+
+    return base.copyWith(
+      displayLarge: titleStyle(base.displayLarge),
+      displayMedium: titleStyle(base.displayMedium),
+      displaySmall: titleStyle(base.displaySmall),
+      headlineVeryLarge: titleStyle(base.headlineLarge),
+
+Please align the items with whitespace like this:
+
+    return base.copyWith(
+      displayLarge:      titleStyle(base.displayLarge),
+      displayMedium:     titleStyle(base.displayMedium),
+      displaySmall:      titleStyle(base.displaySmall),
+      headlineVeryLarge: titleStyle(base.headlineLarge),
