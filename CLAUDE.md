@@ -8,15 +8,11 @@ We will target a mobile interface first. But try to use elements that will work 
 
 # Tech Decisions Made
 
-Framework: Flutter (compiled to web via flutter run -d chrome)
-
-Design system: Material 3 (useMaterial3: true in ThemeData) — built-in, no extra packages needed
-
-Routing: go_router — for proper URL-based navigation (/login, /search, /profile, etc.) so it feels like a real website
-
-State management: Riverpod — keep it light and simple.
-
-Data: Fake/hardcoded data in Dart files, no backend.
+* Framework: Flutter - compiled to web via `flutter run -d chrome`
+* Design system: Material 3 — built-in, no extra packages needed
+* Routing: go_router — for proper URL-based navigation (/login, /search, /profile, etc.) so it feels like a real website
+* State management: Riverpod — keep it light and simple.
+* Data: Fake/hardcoded data in Dart files, no backend.
 
 # Planned Pages for final deliverable
 
@@ -34,20 +30,11 @@ Data: Fake/hardcoded data in Dart files, no backend.
 * Maybe try "Widgetbook" to see all the separate components
 * Integrate a way to implement i18n for the components, probably using "slang"
 
-# Coding standards.
+# Tooling 
 
-When making list like this one:
+After making changes please check for errors by running:
 
-    return base.copyWith(
-      displayLarge: titleStyle(base.displayLarge),
-      displayMedium: titleStyle(base.displayMedium),
-      displaySmall: titleStyle(base.displaySmall),
-      headlineVeryLarge: titleStyle(base.headlineLarge),
-
-Please align the items with whitespace like this:
-
-    return base.copyWith(
-      displayLarge:      titleStyle(base.displayLarge),
-      displayMedium:     titleStyle(base.displayMedium),
-      displaySmall:      titleStyle(base.displaySmall),
-      headlineVeryLarge: titleStyle(base.headlineLarge),
+    $ flutter analyze
+    $ flutter test
+    $ flutter build web
+    $ dart format
