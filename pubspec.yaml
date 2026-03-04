@@ -37,9 +37,12 @@ dependencies:
   google_fonts: ^8.0.2
   material_color_utilities: ^0.13.0
   flex_color_picker: ^3.6.0
-  device_wrapper:
+  iphone16_wrapper:
     git:
-      url: https://github.com/xapple/device_wrapper
+      url: https://github.com/xapple/iphone16_wrapper
+
+dependency_overrides:
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:

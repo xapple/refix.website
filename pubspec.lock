@@ -113,15 +113,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  device_wrapper:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "55514fb6043629dfb5e92130d75bc339620454c5"
-      url: "https://github.com/xapple/device_wrapper"
-    source: git
-    version: "1.2.1"
   fake_async:
     dependency: transitive
     description:
@@ -265,6 +256,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  iphone16_wrapper:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "94f760c2c9bd423e5b408d9a8b68cf52bce6b8ad"
+      url: "https://github.com/xapple/iphone16_wrapper"
+    source: git
+    version: "1.0.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -671,5 +671,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.10.7 <4.0.0"
+  dart: ">=3.11.0 <4.0.0"
   flutter: ">=3.38.4"

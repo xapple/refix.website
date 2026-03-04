@@ -1,4 +1,4 @@
-import 'package:device_wrapper/device_wrapper.dart';
+import 'package:iphone16_wrapper/iphone16_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,14 +14,13 @@ class RefixDemoShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DeviceWrapper(
-      initialMode: DeviceMode.iphone,
-      initialTheme: WrapperTheme.dark,
-      initialRealisticFrame: true,
-      showModeToggle: false,
-      mobileDeviceBehavior: MobileDeviceBehavior.alwaysShowFrame,
-      backgroundColor: const Color(0xFF1E1E1E),
-      child: const RefixApp(),
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: IPhone16Wrapper(
+        urlBar: 'refix.website',
+        backgroundColor: const Color(0xFF1E1E1E),
+        child: const RefixApp(),
+      ),
     );
   }
 }
