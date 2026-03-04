@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,6 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool _emergencyMode = false;
   final _searchController = TextEditingController();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void dispose() {
@@ -24,11 +29,56 @@ class _SplashScreenState extends State<SplashScreen> {
     final accent = cs.tertiary;
     final bg = cs.surfaceContainerLowest;
 
+    final bottomPadding = MediaQuery.paddingOf(context).bottom;
+
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: bg,
-      body: SafeArea(
-        child: SingleChildScrollView(
+      drawer: Drawer(
+        child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(color: cs.primary),
+                child: Image.asset('assets/images/logo.png', height: 48),
+              ),
+              ListTile(
+                leading: Icon(Icons.home, color: cs.onSurface),
+                title: const Text('Home'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  context.go('/');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.palette, color: cs.onSurface),
+                title: const Text('Colors'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  context.go('/colors');
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.text_fields, color: cs.onSurface),
+                title: const Text('Fonts'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  context.go('/fonts');
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: EdgeInsets.only(
+              top: MediaQuery.paddingOf(context).top,
+              bottom: bottomPadding + 72,
+            ),
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               // App bar row (scrolls with content)
@@ -43,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         borderRadius: BorderRadius.circular(10),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          onTap: () {},
+                          onTap: () => _scaffoldKey.currentState?.openDrawer(),
                           child: Padding(
                             padding: const EdgeInsets.all(6),
                             child: Icon(Icons.menu, color: cs.onTertiary, size: 26),
