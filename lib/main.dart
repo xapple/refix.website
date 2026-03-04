@@ -16,6 +16,8 @@ class RefixDemoShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return DeviceWrapper(
       initialMode: DeviceMode.iphone,
+      initialTheme: WrapperTheme.dark,
+      initialRealisticFrame: true,
       showModeToggle: false,
       mobileDeviceBehavior: MobileDeviceBehavior.alwaysShowFrame,
       backgroundColor: const Color(0xFF1E1E1E),
