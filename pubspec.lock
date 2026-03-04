@@ -116,9 +116,11 @@ packages:
   device_wrapper:
     dependency: "direct main"
     description:
-      path: "/Users/sinclair/repos/device_wrapper"
-      relative: false
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "55514fb6043629dfb5e92130d75bc339620454c5"
+      url: "https://github.com/xapple/device_wrapper"
+    source: git
     version: "1.2.1"
   fake_async:
     dependency: transitive
