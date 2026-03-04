@@ -28,6 +28,15 @@ I want to set the two font/typeface of the project (The title font, and the body
 
 Also, I want to pick the 3 colors.
 
-Then we want to see theses choice on two pages:
+Then we want to see these choice on two pages:
 - The font page with the following.
 - The color page with the following.
+
+
+# TODO
+
+* Fix the liquid glass pill effect at the bottom of the page showing the URL and move it to the device_wrapper package.
+* Add back buttons to the "Fonts" and "Colors" pages.
+* Work on the Hamburger menu.
+* Make the splash screen better and match it to the Figma design.
+* Deploy the website to a github pages setup with the DNS configured.
