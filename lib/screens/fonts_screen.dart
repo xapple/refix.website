@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../providers/font_providers.dart';
 import '../theme/app_fonts.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/top_bar.dart';
 
 class FontsScreen extends StatelessWidget {
   const FontsScreen({super.key});
@@ -34,37 +36,49 @@ class FontsScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Fonts')),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 800),
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
-            children: [
-              const _FontPickerSection(),
-              const SizedBox(height: 48),
-              ...styles.map((item) {
-                final (style, name) = item;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      drawer: const AppDrawer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const TopBar(),
+            Expanded(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 40,
+                    ),
                     children: [
-                      Text(_sample, style: style),
-                      const SizedBox(height: 4),
-                      Text(
-                        name,
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 11,
-                          color: outline,
-                        ),
-                      ),
+                      const _FontPickerSection(),
+                      const SizedBox(height: 48),
+                      ...styles.map((item) {
+                        final (style, name) = item;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 32),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(_sample, style: style),
+                              const SizedBox(height: 4),
+                              Text(
+                                name,
+                                style: GoogleFonts.robotoMono(
+                                  fontSize: 11,
+                                  color: outline,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                     ],
                   ),
-                );
-              }),
-            ],
-          ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

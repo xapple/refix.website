@@ -2,6 +2,7 @@ import 'package:iphone16_wrapper/iphone16_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'providers/theme_mode_provider.dart';
 import 'theme/app_theme.dart';
 import 'router/app_router.dart';
 
@@ -31,13 +32,14 @@ class RefixApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themes = ref.watch(appThemeProvider);
+    final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp.router(
       title: 'Refix',
       debugShowCheckedModeBanner: false,
       theme: themes.light,
       darkTheme: themes.dark,
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       routerConfig: appRouter,
     );
   }

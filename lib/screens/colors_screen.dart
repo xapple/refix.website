@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 import '../providers/color_providers.dart';
+import '../widgets/app_drawer.dart';
+import '../widgets/top_bar.dart';
 
 class ColorsScreen extends ConsumerWidget {
   const ColorsScreen({super.key});
@@ -35,98 +37,126 @@ class ColorsScreen extends ConsumerWidget {
     ).primaryPalette;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Color Palette')),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: ListView(
-            padding: const EdgeInsets.all(24),
-            children: [
-              Text('Seed Colors', style: textTheme.headlineMedium),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  _ColorPickerCard(
-                    label: 'Primary',
-                    color: primary,
-                    onChanged: (c) =>
-                        ref.read(primaryColorProvider.notifier).set(c),
+      drawer: const AppDrawer(),
+      body: SafeArea(
+        child: Column(
+          children: [
+            const TopBar(),
+            Expanded(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1400),
+                  child: ListView(
+                    padding: const EdgeInsets.all(24),
+                    children: [
+                      Text('Seed Colors', style: textTheme.headlineMedium),
+                      const SizedBox(height: 16),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        children: [
+                          _ColorPickerCard(
+                            label: 'Primary',
+                            color: primary,
+                            onChanged: (c) =>
+                                ref.read(primaryColorProvider.notifier).set(c),
+                          ),
+                          _ColorPickerCard(
+                            label: 'Secondary',
+                            color: secondary,
+                            onChanged: (c) => ref
+                                .read(secondaryColorProvider.notifier)
+                                .set(c),
+                          ),
+                          _ColorPickerCard(
+                            label: 'Tertiary',
+                            color: tertiary,
+                            onChanged: (c) =>
+                                ref.read(tertiaryColorProvider.notifier).set(c),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      Text(
+                        'Generated Tonal Palettes (0–100)',
+                        style: textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Generated from your three seed colors.',
+                        style: textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 24),
+                      _PaletteStrip(
+                        label: 'Primary',
+                        swatches: _swatches(primaryPalette),
+                      ),
+                      const SizedBox(height: 20),
+                      _PaletteStrip(
+                        label: 'Secondary',
+                        swatches: _swatches(secondaryPalette),
+                      ),
+                      const SizedBox(height: 20),
+                      _PaletteStrip(
+                        label: 'Tertiary',
+                        swatches: _swatches(tertiaryPalette),
+                      ),
+                      const SizedBox(height: 40),
+                      Text(
+                        'Active ColorScheme Roles',
+                        style: textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Colors currently exposed by ThemeData.colorScheme.',
+                        style: textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 20),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        children: [
+                          _RoleChip(
+                            name: 'primary',
+                            color: colorScheme.primary,
+                          ),
+                          _RoleChip(
+                            name: 'primaryContainer',
+                            color: colorScheme.primaryContainer,
+                          ),
+                          _RoleChip(
+                            name: 'secondary',
+                            color: colorScheme.secondary,
+                          ),
+                          _RoleChip(
+                            name: 'secondaryContainer',
+                            color: colorScheme.secondaryContainer,
+                          ),
+                          _RoleChip(
+                            name: 'tertiary',
+                            color: colorScheme.tertiary,
+                          ),
+                          _RoleChip(
+                            name: 'tertiaryContainer',
+                            color: colorScheme.tertiaryContainer,
+                          ),
+                          _RoleChip(
+                            name: 'surface',
+                            color: colorScheme.surface,
+                          ),
+                          _RoleChip(
+                            name: 'outline',
+                            color: colorScheme.outline,
+                          ),
+                          _RoleChip(name: 'error', color: colorScheme.error),
+                        ],
+                      ),
+                    ],
                   ),
-                  _ColorPickerCard(
-                    label: 'Secondary',
-                    color: secondary,
-                    onChanged: (c) =>
-                        ref.read(secondaryColorProvider.notifier).set(c),
-                  ),
-                  _ColorPickerCard(
-                    label: 'Tertiary',
-                    color: tertiary,
-                    onChanged: (c) =>
-                        ref.read(tertiaryColorProvider.notifier).set(c),
-                  ),
-                ],
+                ),
               ),
-              const SizedBox(height: 40),
-              Text(
-                'Generated Tonal Palettes (0–100)',
-                style: textTheme.headlineSmall,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Generated from your three seed colors.',
-                style: textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 24),
-              _PaletteStrip(
-                label: 'Primary',
-                swatches: _swatches(primaryPalette),
-              ),
-              const SizedBox(height: 20),
-              _PaletteStrip(
-                label: 'Secondary',
-                swatches: _swatches(secondaryPalette),
-              ),
-              const SizedBox(height: 20),
-              _PaletteStrip(
-                label: 'Tertiary',
-                swatches: _swatches(tertiaryPalette),
-              ),
-              const SizedBox(height: 40),
-              Text('Active ColorScheme Roles', style: textTheme.headlineSmall),
-              const SizedBox(height: 8),
-              Text(
-                'Colors currently exposed by ThemeData.colorScheme.',
-                style: textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 20),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  _RoleChip(name: 'primary', color: colorScheme.primary),
-                  _RoleChip(
-                    name: 'primaryContainer',
-                    color: colorScheme.primaryContainer,
-                  ),
-                  _RoleChip(name: 'secondary', color: colorScheme.secondary),
-                  _RoleChip(
-                    name: 'secondaryContainer',
-                    color: colorScheme.secondaryContainer,
-                  ),
-                  _RoleChip(name: 'tertiary', color: colorScheme.tertiary),
-                  _RoleChip(
-                    name: 'tertiaryContainer',
-                    color: colorScheme.tertiaryContainer,
-                  ),
-                  _RoleChip(name: 'surface', color: colorScheme.surface),
-                  _RoleChip(name: 'outline', color: colorScheme.outline),
-                  _RoleChip(name: 'error', color: colorScheme.error),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -182,7 +212,12 @@ class _ColorPickerCard extends StatelessWidget {
               height: 100,
               color: color,
               alignment: Alignment.center,
-              child: Icon(Icons.colorize, color: color.computeLuminance() > 0.5 ? Colors.black54 : Colors.white54),
+              child: Icon(
+                Icons.colorize,
+                color: color.computeLuminance() > 0.5
+                    ? Colors.black54
+                    : Colors.white54,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(12),
