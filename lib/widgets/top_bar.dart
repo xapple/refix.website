@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import 'brightness_toggle.dart';
 
@@ -14,39 +15,26 @@ class TopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Material(
-              color: accent,
-              borderRadius: BorderRadius.circular(10),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(10),
-                onTap: () => Scaffold.of(context).openDrawer(),
-                child: Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: Icon(Icons.menu, color: cs.onTertiary, size: 26),
-                ),
-              ),
-            ),
-          ),
-          const Spacer(),
+          // Logo on the left
           Image.asset('assets/images/logo.png', height: 40),
-          const Spacer(),
+                              const Spacer(),
+          // Brightness toggle
           const BrightnessToggle(),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Material(
-              color: accent,
-              shape: const CircleBorder(),
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Icon(Icons.person, color: cs.onTertiary, size: 26),
-                ),
-              ),
-            ),
+          // Language flag menu
+          IconButton(
+            onPressed: () {},
+            icon: PhosphorIcon(PhosphorIconsDuotone.flag, color: accent, size: 26),
+          ),
+          // Hamburger menu
+          IconButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            icon: PhosphorIcon(PhosphorIconsDuotone.list, color: accent, size: 26),
+          ),
+          // Profile
+          IconButton.filled(
+            onPressed: () {},
+            style: IconButton.styleFrom(backgroundColor: accent),
+            icon: PhosphorIcon(PhosphorIconsDuotone.user, color: cs.onTertiary, size: 26),
           ),
         ],
       ),

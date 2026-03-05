@@ -40,6 +40,7 @@ dependencies:
   iphone16_wrapper:
     git:
       url: https://github.com/xapple/iphone16_wrapper
+  phosphor_flutter: ^2.1.0
 
 dependency_overrides:
   google_fonts: ^8.0.2
