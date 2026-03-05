@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics_compat.dart'
+    show RenderingStrategy;
 
 import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
@@ -15,6 +17,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   bool _emergencyMode = false;
   final _searchController = TextEditingController();
+  final _categoriesSectionKey = GlobalKey();
+
+  Future<void> _scrollToCategories() async {
+    final context = _categoriesSectionKey.currentContext;
+    if (context == null) {
+      return;
+    }
+    await Scrollable.ensureVisible(
+      context,
+      duration: const Duration(milliseconds: 420),
+      curve: Curves.easeOutCubic,
+      alignment: 0.02,
+    );
+  }
 
   @override
   void dispose() {
@@ -74,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 borderRadius: BorderRadius.circular(32),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.08),
+                                    color: cs.shadow.withValues(alpha: 0.12),
                                     blurRadius: 8,
                                     offset: const Offset(0, 2),
                                   ),
@@ -183,7 +199,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         const SizedBox(height: 12),
                         IconButton.filled(
-                          onPressed: () {},
+                          onPressed: _scrollToCategories,
                           style: IconButton.styleFrom(
                             backgroundColor: cs.primary,
                             foregroundColor: cs.onPrimary,
@@ -201,6 +217,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: tokens.browseCategoriesBackground,
                   ),
                   child: Padding(
+                    key: _categoriesSectionKey,
                     padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,6 +293,18 @@ class _CategoryCard extends StatelessWidget {
                 category.iconAsset,
                 width: 76,
                 height: 76,
+                fit: BoxFit.contain,
+                renderingStrategy: RenderingStrategy.raster,
+                placeholderBuilder: (context) => const SizedBox(
+                  width: 28,
+                  height: 28,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+                errorBuilder: (context, error, stackTrace) => Icon(
+                  Icons.broken_image_outlined,
+                  size: 44,
+                  color: cs.onSurfaceVariant,
+                ),
               ),
             ),
           ),
@@ -334,6 +363,15 @@ class _FooterSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final text = Theme.of(context).textTheme;
     final contactStyle = text.titleMedium;
+    final leftLinks = <Widget>[
+      const _FooterLinkButton(label: 'FAQ'),
+      const SizedBox(height: 4),
+      const _FooterLinkButton(label: 'How does it work'),
+      const SizedBox(height: 4),
+      const _FooterLinkButton(label: 'Become a craftsman'),
+      const SizedBox(height: 4),
+      const _FooterLinkButton(label: 'Support center'),
+    ];
 
     Widget rightColumn({required TextAlign align}) {
       final isStartAligned = align == TextAlign.start;
@@ -359,13 +397,7 @@ class _FooterSection extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _FooterLinkButton(label: 'FAQ'),
-              const SizedBox(height: 4),
-              const _FooterLinkButton(label: 'How does it work'),
-              const SizedBox(height: 4),
-              const _FooterLinkButton(label: 'Become a craftsman'),
-              const SizedBox(height: 4),
-              const _FooterLinkButton(label: 'Support center'),
+              ...leftLinks,
               const SizedBox(height: 24),
               rightColumn(align: TextAlign.start),
             ],
@@ -375,18 +407,10 @@ class _FooterSection extends StatelessWidget {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _FooterLinkButton(label: 'FAQ'),
-                  SizedBox(height: 4),
-                  _FooterLinkButton(label: 'How does it work'),
-                  SizedBox(height: 4),
-                  _FooterLinkButton(label: 'Become a craftsman'),
-                  SizedBox(height: 4),
-                  _FooterLinkButton(label: 'Support center'),
-                ],
+                children: leftLinks,
               ),
             ),
             const SizedBox(width: 12),
@@ -406,33 +430,21 @@ class _Category {
 }
 
 const List<_Category> _categories = [
-  _Category(
-    label: 'Plumbing',
-    iconAsset: 'assets/category_icons/01-plomberie.svg',
-  ),
+  _Category(label: 'Plumbing', iconAsset: 'assets/category_icons/plumbing.svg'),
   _Category(
     label: 'Electrical',
-    iconAsset: 'assets/category_icons/02-electricite.svg',
+    iconAsset: 'assets/category_icons/electrical.svg',
   ),
-  _Category(label: 'Garden', iconAsset: 'assets/category_icons/03-jardin.svg'),
+  _Category(label: 'Garden', iconAsset: 'assets/category_icons/garden.svg'),
   _Category(
     label: 'Appliances',
-    iconAsset: 'assets/category_icons/04-electromenager.svg',
+    iconAsset: 'assets/category_icons/appliances.svg',
   ),
   _Category(
     label: 'Furniture',
-    iconAsset: 'assets/category_icons/05-mobilier.svg',
+    iconAsset: 'assets/category_icons/furniture.svg',
   ),
-  _Category(
-    label: 'Locks',
-    iconAsset: 'assets/category_icons/06-serrurerie.svg',
-  ),
-  _Category(
-    label: 'Heating',
-    iconAsset: 'assets/category_icons/07-chauffage.svg',
-  ),
-  _Category(
-    label: 'Bicycles',
-    iconAsset: 'assets/category_icons/08-velo-mobilite.svg',
-  ),
+  _Category(label: 'Locks', iconAsset: 'assets/category_icons/locks.svg'),
+  _Category(label: 'Heating', iconAsset: 'assets/category_icons/heating.svg'),
+  _Category(label: 'Bicycles', iconAsset: 'assets/category_icons/bicycles.svg'),
 ];

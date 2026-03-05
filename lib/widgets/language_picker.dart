@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../providers/locale_provider.dart';
+import '../theme/app_color_tokens.dart';
 
 /// Material 3 menu for switching between English and French.
 class LanguagePicker extends ConsumerStatefulWidget {
@@ -24,8 +25,7 @@ class _LanguagePickerState extends ConsumerState<LanguagePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final accent = Color.lerp(colorScheme.primary, colorScheme.secondary, 0.5)!;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final current = ref.watch(localeProvider);
 
     return MenuAnchor(
@@ -50,7 +50,7 @@ class _LanguagePickerState extends ConsumerState<LanguagePicker> {
         tooltip: 'Language',
         icon: PhosphorIcon(
           PhosphorIconsBold.globe,
-          color: accent,
+          color: tokens.interactiveAccent,
           size: widget.size,
         ),
       ),

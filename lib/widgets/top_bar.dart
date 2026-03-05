@@ -17,11 +17,6 @@ class TopBar extends ConsumerWidget {
     final lightTheme = ref.watch(appThemeProvider).light;
     final cs = lightTheme.colorScheme;
     final tokens = lightTheme.extension<AppColorTokens>()!;
-    final accent = Color.lerp(cs.primary, cs.secondary, 0.5)!;
-    final onAccent =
-        ThemeData.estimateBrightnessForColor(accent) == Brightness.dark
-        ? Colors.white
-        : Colors.black;
 
     return Theme(
       data: lightTheme,
@@ -61,7 +56,7 @@ class TopBar extends ConsumerWidget {
                         child: Text(
                           'EN',
                           style: TextStyle(
-                            color: accent,
+                            color: tokens.interactiveAccent,
                             fontSize: 8,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 0.2,
@@ -79,10 +74,12 @@ class TopBar extends ConsumerWidget {
               // Profile
               IconButton.filled(
                 onPressed: () {},
-                style: IconButton.styleFrom(backgroundColor: accent),
+                style: IconButton.styleFrom(
+                  backgroundColor: tokens.interactiveAccent,
+                ),
                 icon: PhosphorIcon(
                   PhosphorIconsDuotone.user,
-                  color: onAccent,
+                  color: tokens.onInteractiveAccent,
                   size: 26,
                 ),
               ),

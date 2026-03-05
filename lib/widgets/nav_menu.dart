@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../theme/app_color_tokens.dart';
+
 /// Material 3 dropdown navigation menu triggered by the hamburger icon.
 class NavMenu extends StatefulWidget {
   const NavMenu({super.key, this.size = 30});
@@ -23,8 +25,7 @@ class _NavMenuState extends State<NavMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final accent = Color.lerp(colorScheme.primary, colorScheme.secondary, 0.5)!;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final location = GoRouterState.of(context).uri.path;
 
     return MenuAnchor(
@@ -50,7 +51,7 @@ class _NavMenuState extends State<NavMenu> {
         tooltip: 'Menu',
         icon: PhosphorIcon(
           PhosphorIconsBold.list,
-          color: accent,
+          color: tokens.interactiveAccent,
           size: widget.size,
         ),
       ),

@@ -38,6 +38,7 @@ dependencies:
   material_color_utilities: ^0.13.0
   flex_color_picker: ^3.6.0
   flutter_svg: ^2.2.0
+  vector_graphics: ^1.1.19
   iphone16_wrapper:
     git:
       url: https://github.com/xapple/iphone16_wrapper

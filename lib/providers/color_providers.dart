@@ -28,8 +28,3 @@ final darkTertiaryColorProvider =
     NotifierProvider<SimpleNotifier<Color>, Color>(
       () => SimpleNotifier(AppColors.darkTertiary),
     );
-
-// Backward-compatible aliases for existing code paths.
-final primaryColorProvider = lightPrimaryColorProvider;
-final secondaryColorProvider = lightSecondaryColorProvider;
-final tertiaryColorProvider = lightTertiaryColorProvider;
