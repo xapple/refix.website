@@ -10,6 +10,6 @@ class AppColors {
 
   // Dark mode seed colors
   static const Color darkPrimary = Color(0xFF1A0E07);
-  static const Color darkSecondary = Color(0xFF4F4F4F);
+  static const Color darkSecondary = Color(0xFF4F4F4F); 
   static const Color darkTertiary = Color(0xFF1E42FF);
 }

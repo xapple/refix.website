@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
@@ -181,146 +182,61 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        Material(
-                          color: cs.primary,
-                          shape: const CircleBorder(),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: cs.onPrimary,
-                                size: 28,
-                              ),
-                            ),
+                        IconButton.filled(
+                          onPressed: () {},
+                          style: IconButton.styleFrom(
+                            backgroundColor: cs.primary,
+                            foregroundColor: cs.onPrimary,
                           ),
+                          iconSize: 28,
+                          icon: const Icon(Icons.keyboard_arrow_down),
                         ),
                       ],
                     ),
                   ),
                 ),
 
-                // Lorem ipsum filler content
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Why choose Refix?',
-                        style: text.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: tokens.browseCategoriesBackground,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: _categories.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: 0.92,
+                              ),
+                          itemBuilder: (context, index) {
+                            final category = _categories[index];
+                            return _CategoryCard(category: category);
+                          },
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur '
-                        'adipiscing elit. Sed do eiusmod tempor '
-                        'incididunt ut labore et dolore magna aliqua. '
-                        'Ut enim ad minim veniam, quis nostrud '
-                        'exercitation ullamco laboris nisi ut aliquip '
-                        'ex ea commodo consequat.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Trusted Professionals',
-                        style: text.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(height: 34),
+                        Divider(
+                          color: cs.outline.withValues(alpha: 0.35),
+                          thickness: 2,
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Duis aute irure dolor in reprehenderit in '
-                        'voluptate velit esse cillum dolore eu fugiat '
-                        'nulla pariatur. Excepteur sint occaecat '
-                        'cupidatat non proident, sunt in culpa qui '
-                        'officia deserunt mollit anim id est laborum. '
-                        'Sed ut perspiciatis unde omnis iste natus '
-                        'error sit voluptatem accusantium doloremque '
-                        'laudantium.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Fast & Reliable',
-                        style: text.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(height: 28),
+                        const _FooterSection(),
+                        const SizedBox(height: 44),
+                        Center(
+                          child: Text(
+                            '© 2026 Lucas Sinclair',
+                            style: text.titleMedium,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Nemo enim ipsam voluptatem quia voluptas sit '
-                        'aspernatur aut odit aut fugit, sed quia '
-                        'consequuntur magni dolores eos qui ratione '
-                        'voluptatem sequi nesciunt. Neque porro '
-                        'quisquam est, qui dolorem ipsum quia dolor '
-                        'sit amet, consectetur, adipisci velit.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'How it works',
-                        style: text.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Ut enim ad minima veniam, quis nostrum '
-                        'exercitationem ullam corporis suscipit '
-                        'laboriosam, nisi ut aliquid ex ea commodi '
-                        'consequatur? Quis autem vel eum iure '
-                        'reprehenderit qui in ea voluptate velit esse '
-                        'quam nihil molestiae consequatur, vel illum '
-                        'qui dolorem eum fugiat quo voluptas nulla '
-                        'pariatur.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'At vero eos et accusamus et iusto odio '
-                        'dignissimos ducimus qui blanditiis '
-                        'praesentium voluptatum deleniti atque '
-                        'corrupti quos dolores et quas molestias '
-                        'excepturi sint occaecati cupiditate non '
-                        'provident, similique sunt in culpa qui '
-                        'officia deserunt mollitia animi, id est '
-                        'laborum et dolorum fuga.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Our Community',
-                        style: text.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Et harum quidem rerum facilis est et expedita '
-                        'distinctio. Nam libero tempore, cum soluta '
-                        'nobis est eligendi optio cumque nihil impedit '
-                        'quo minus id quod maxime placeat facere '
-                        'possimus, omnis voluptas assumenda est, omnis '
-                        'dolor repellendus.',
-                        style: text.bodyMedium,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Temporibus autem quibusdam et aut officiis '
-                        'debitis aut rerum necessitatibus saepe '
-                        'eveniet ut et voluptates repudiandae sint et '
-                        'molestiae non recusandae. Itaque earum rerum '
-                        'hic tenetur a sapiente delectus, ut aut '
-                        'reiciendis voluptatibus maiores alias '
-                        'consequatur aut perferendis doloribus '
-                        'asperiores repellat.',
-                        style: text.bodyMedium,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -331,3 +247,192 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
+class _CategoryCard extends StatelessWidget {
+  const _CategoryCard({required this.category});
+
+  final _Category category;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              backgroundColor: cs.surface.withValues(alpha: 0.35),
+              side: BorderSide(color: cs.outline),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            child: Center(
+              child: SvgPicture.asset(
+                category.iconAsset,
+                width: 76,
+                height: 76,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          category.label,
+          style: text.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+}
+
+class _FooterLinkButton extends StatelessWidget {
+  const _FooterLinkButton({
+    required this.label,
+    this.textAlign = TextAlign.start,
+  });
+
+  final String label;
+  final TextAlign textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+    final isStartAligned = textAlign == TextAlign.start;
+
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        foregroundColor: cs.onSurface,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: Size.zero,
+        padding: EdgeInsets.zero,
+        alignment: isStartAligned
+            ? Alignment.centerLeft
+            : Alignment.centerRight,
+      ),
+      child: Text(
+        label,
+        textAlign: textAlign,
+        style: text.headlineSmall?.copyWith(
+          decoration: TextDecoration.underline,
+        ),
+      ),
+    );
+  }
+}
+
+class _FooterSection extends StatelessWidget {
+  const _FooterSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+    final contactStyle = text.titleMedium;
+
+    Widget rightColumn({required TextAlign align}) {
+      final isStartAligned = align == TextAlign.start;
+      return Column(
+        crossAxisAlignment: isStartAligned
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
+        children: [
+          Text('info@refix.website', style: contactStyle),
+          const SizedBox(height: 2),
+          Text('+41 22 899 77 13', style: contactStyle),
+          const SizedBox(height: 26),
+          _FooterLinkButton(label: 'Press', textAlign: align),
+          const SizedBox(height: 4),
+          _FooterLinkButton(label: 'Report an issue', textAlign: align),
+        ],
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 620) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const _FooterLinkButton(label: 'FAQ'),
+              const SizedBox(height: 4),
+              const _FooterLinkButton(label: 'How does it work'),
+              const SizedBox(height: 4),
+              const _FooterLinkButton(label: 'Become a craftsman'),
+              const SizedBox(height: 4),
+              const _FooterLinkButton(label: 'Support center'),
+              const SizedBox(height: 24),
+              rightColumn(align: TextAlign.start),
+            ],
+          );
+        }
+
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _FooterLinkButton(label: 'FAQ'),
+                  SizedBox(height: 4),
+                  _FooterLinkButton(label: 'How does it work'),
+                  SizedBox(height: 4),
+                  _FooterLinkButton(label: 'Become a craftsman'),
+                  SizedBox(height: 4),
+                  _FooterLinkButton(label: 'Support center'),
+                ],
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(child: rightColumn(align: TextAlign.end)),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _Category {
+  const _Category({required this.label, required this.iconAsset});
+
+  final String label;
+  final String iconAsset;
+}
+
+const List<_Category> _categories = [
+  _Category(
+    label: 'Plumbing',
+    iconAsset: 'assets/category_icons/01-plomberie.svg',
+  ),
+  _Category(
+    label: 'Electrical',
+    iconAsset: 'assets/category_icons/02-electricite.svg',
+  ),
+  _Category(label: 'Garden', iconAsset: 'assets/category_icons/03-jardin.svg'),
+  _Category(
+    label: 'Appliances',
+    iconAsset: 'assets/category_icons/04-electromenager.svg',
+  ),
+  _Category(
+    label: 'Furniture',
+    iconAsset: 'assets/category_icons/05-mobilier.svg',
+  ),
+  _Category(
+    label: 'Locks',
+    iconAsset: 'assets/category_icons/06-serrurerie.svg',
+  ),
+  _Category(
+    label: 'Heating',
+    iconAsset: 'assets/category_icons/07-chauffage.svg',
+  ),
+  _Category(
+    label: 'Bicycles',
+    iconAsset: 'assets/category_icons/08-velo-mobilite.svg',
+  ),
+];

@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^8.0.2
   material_color_utilities: ^0.13.0
   flex_color_picker: ^3.6.0
+  flutter_svg: ^2.2.0
   iphone16_wrapper:
     git:
       url: https://github.com/xapple/iphone16_wrapper
@@ -69,6 +70,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/category_icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
