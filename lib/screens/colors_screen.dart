@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 import '../providers/color_providers.dart';
+import '../providers/theme_mode_provider.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/top_bar.dart';
 
@@ -19,9 +20,18 @@ class ColorsScreen extends ConsumerWidget {
     final darkPrimary = ref.watch(darkPrimaryColorProvider);
     final darkSecondary = ref.watch(darkSecondaryColorProvider);
     final darkTertiary = ref.watch(darkTertiaryColorProvider);
+    final mode = ref.watch(themeModeProvider);
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final platformBrightness = MediaQuery.platformBrightnessOf(context);
+    final isDark = switch (mode) {
+      ThemeMode.dark => true,
+      ThemeMode.light => false,
+      ThemeMode.system => platformBrightness == Brightness.dark,
+    };
+    final activeLabel = isDark ? 'Dark' : 'Light';
+    final otherLabel = isDark ? 'Light' : 'Dark';
 
     final lightPrimaryPalette = SchemeTonalSpot(
       sourceColorHct: Hct.fromInt(lightPrimary.toARGB32()),
@@ -72,7 +82,7 @@ class ColorsScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Light Theme Seed Colors',
+                        'Active Theme Seed Colors ($activeLabel)',
                         style: textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 16),
@@ -82,30 +92,54 @@ class ColorsScreen extends ConsumerWidget {
                         children: [
                           _ColorPickerCard(
                             label: 'Primary',
-                            color: lightPrimary,
-                            onChanged: (c) => ref
-                                .read(lightPrimaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? darkPrimary : lightPrimary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(darkPrimaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(lightPrimaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                           _ColorPickerCard(
                             label: 'Secondary',
-                            color: lightSecondary,
-                            onChanged: (c) => ref
-                                .read(lightSecondaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? darkSecondary : lightSecondary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(darkSecondaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(lightSecondaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                           _ColorPickerCard(
                             label: 'Tertiary',
-                            color: lightTertiary,
-                            onChanged: (c) => ref
-                                .read(lightTertiaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? darkTertiary : lightTertiary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(darkTertiaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(lightTertiaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                         ],
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        'Dark Theme Seed Colors',
+                        'Other Theme Seed Colors ($otherLabel)',
                         style: textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 12),
@@ -115,24 +149,48 @@ class ColorsScreen extends ConsumerWidget {
                         children: [
                           _ColorPickerCard(
                             label: 'Primary',
-                            color: darkPrimary,
-                            onChanged: (c) => ref
-                                .read(darkPrimaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? lightPrimary : darkPrimary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(lightPrimaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(darkPrimaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                           _ColorPickerCard(
                             label: 'Secondary',
-                            color: darkSecondary,
-                            onChanged: (c) => ref
-                                .read(darkSecondaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? lightSecondary : darkSecondary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(lightSecondaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(darkSecondaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                           _ColorPickerCard(
                             label: 'Tertiary',
-                            color: darkTertiary,
-                            onChanged: (c) => ref
-                                .read(darkTertiaryColorProvider.notifier)
-                                .set(c),
+                            color: isDark ? lightTertiary : darkTertiary,
+                            onChanged: (c) {
+                              if (isDark) {
+                                ref
+                                    .read(lightTertiaryColorProvider.notifier)
+                                    .set(c);
+                              } else {
+                                ref
+                                    .read(darkTertiaryColorProvider.notifier)
+                                    .set(c);
+                              }
+                            },
                           ),
                         ],
                       ),

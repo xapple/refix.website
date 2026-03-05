@@ -28,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final text = Theme.of(context).textTheme;
     final accent = cs.tertiary;
     final bg = cs.surfaceContainerLowest;
+    final headerTextColor = cs.onSecondaryContainer;
 
     final bottomPadding = MediaQuery.paddingOf(context).bottom;
 
@@ -111,7 +112,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 'Find a local repair man/women near you',
                                 textAlign: TextAlign.center,
                                 style: text.bodyLarge?.copyWith(
-                                  color: accent,
+                                  color: headerTextColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -125,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 Text(
                                   'Emergency mode',
                                   style: text.bodyMedium?.copyWith(
-                                    color: cs.onSecondaryContainer,
+                                    color: headerTextColor,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -143,7 +144,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             Text(
                               "Don't trash it, fix it.",
                               style: text.displaySmall?.copyWith(
-                                color: accent,
+                                color: headerTextColor,
                                 fontWeight: FontWeight.bold,
                                 height: 1.1,
                               ),
