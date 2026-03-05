@@ -39,15 +39,18 @@ class ColorsScreen extends ConsumerWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            const TopBar(),
-            Expanded(
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1400),
-                  child: ListView(
-                    padding: const EdgeInsets.all(24),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1400),
+            child: ListView(
+              padding: const EdgeInsets.only(bottom: 24),
+              children: [
+                const TopBar(),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Seed Colors', style: textTheme.headlineMedium),
                       const SizedBox(height: 16),
@@ -154,9 +157,9 @@ class ColorsScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

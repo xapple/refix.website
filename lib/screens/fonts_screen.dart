@@ -38,47 +38,43 @@ class FontsScreen extends StatelessWidget {
     return Scaffold(
       drawer: const AppDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            const TopBar(),
-            Expanded(
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 800),
-                  child: ListView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: ListView(
+              padding: const EdgeInsets.only(bottom: 40),
+              children: [
+                const TopBar(),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(32, 40, 32, 0),
+                  child: _FontPickerSection(),
+                ),
+                const SizedBox(height: 48),
+                ...styles.map((item) {
+                  final (style, name) = item;
+                  return Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
-                      vertical: 40,
-                    ),
-                    children: [
-                      const _FontPickerSection(),
-                      const SizedBox(height: 48),
-                      ...styles.map((item) {
-                        final (style, name) = item;
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 32),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(_sample, style: style),
-                              const SizedBox(height: 4),
-                              Text(
-                                name,
-                                style: GoogleFonts.robotoMono(
-                                  fontSize: 11,
-                                  color: outline,
-                                ),
-                              ),
-                            ],
+                    ).copyWith(bottom: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(_sample, style: style),
+                        const SizedBox(height: 4),
+                        Text(
+                          name,
+                          style: GoogleFonts.robotoMono(
+                            fontSize: 11,
+                            color: outline,
                           ),
-                        );
-                      }),
-                    ],
-                  ),
-                ),
-              ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

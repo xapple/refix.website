@@ -45,11 +45,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 const TopBar(),
 
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Search bar
+
+                      // Search bar 
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,

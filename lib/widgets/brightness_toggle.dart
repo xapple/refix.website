@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../providers/theme_mode_provider.dart';
 
@@ -8,7 +9,9 @@ import '../providers/theme_mode_provider.dart';
 /// On load it follows the system brightness. Tapping switches to the opposite
 /// explicit mode. If the system brightness changes, we resync automatically.
 class BrightnessToggle extends ConsumerStatefulWidget {
-  const BrightnessToggle({super.key});
+  const BrightnessToggle({super.key, this.size = 26});
+
+  final double size;
 
   @override
   ConsumerState<BrightnessToggle> createState() => _BrightnessToggleState();
@@ -38,8 +41,14 @@ class _BrightnessToggleState extends ConsumerState<BrightnessToggle> {
       ThemeMode.system => platformBrightness == Brightness.dark,
     };
 
+    final accent = Theme.of(context).colorScheme.tertiary;
+
     return IconButton(
-      icon: Icon(isDark ? Icons.dark_mode : Icons.light_mode),
+      icon: PhosphorIcon(
+        isDark ? PhosphorIconsBold.moon : PhosphorIconsBold.sun,
+        color: accent,
+        size: widget.size,
+      ),
       tooltip: isDark ? 'Dark mode' : 'Light mode',
       onPressed: () => ref
           .read(themeModeProvider.notifier)
