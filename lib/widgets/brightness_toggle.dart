@@ -41,7 +41,8 @@ class _BrightnessToggleState extends ConsumerState<BrightnessToggle> {
       ThemeMode.system => platformBrightness == Brightness.dark,
     };
 
-    final accent = Theme.of(context).colorScheme.tertiary;
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = Color.lerp(colorScheme.primary, colorScheme.secondary, 0.5)!;
 
     return IconButton(
       icon: PhosphorIcon(

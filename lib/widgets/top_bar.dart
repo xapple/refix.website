@@ -16,7 +16,11 @@ class TopBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lightTheme = ref.watch(appThemeProvider).light;
     final cs = lightTheme.colorScheme;
-    final accent = cs.tertiary;
+    final accent = Color.lerp(cs.primary, cs.secondary, 0.5)!;
+    final onAccent =
+        ThemeData.estimateBrightnessForColor(accent) == Brightness.dark
+        ? Colors.white
+        : Colors.black;
     final bg = Color(
       TonalPalette.of(
         Hct.fromInt(cs.secondary.toARGB32()).hue,
@@ -41,7 +45,39 @@ class TopBar extends ConsumerWidget {
               // Brightness toggle
               const BrightnessToggle(size: 30),
               // Language picker
-              const LanguagePicker(),
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  const LanguagePicker(),
+                  Positioned(
+                    right: 3,
+                    bottom: 9,
+                    child: IgnorePointer(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 1,
+                        ),
+                        decoration: BoxDecoration(
+                          color: cs.surface,
+                          borderRadius: BorderRadius.circular(7),
+                          border: Border.all(color: cs.outlineVariant),
+                        ),
+                        child: Text(
+                          'EN',
+                          style: TextStyle(
+                            color: accent,
+                            fontSize: 8,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.2,
+                            height: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               // Navigation menu
               const NavMenu(),
               const SizedBox(width: 10),
@@ -51,7 +87,7 @@ class TopBar extends ConsumerWidget {
                 style: IconButton.styleFrom(backgroundColor: accent),
                 icon: PhosphorIcon(
                   PhosphorIconsDuotone.user,
-                  color: cs.onTertiary,
+                  color: onAccent,
                   size: 26,
                 ),
               ),

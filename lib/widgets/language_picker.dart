@@ -24,7 +24,8 @@ class _LanguagePickerState extends ConsumerState<LanguagePicker> {
 
   @override
   Widget build(BuildContext context) {
-    final accent = Theme.of(context).colorScheme.tertiary;
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = Color.lerp(colorScheme.primary, colorScheme.secondary, 0.5)!;
     final current = ref.watch(localeProvider);
 
     return MenuAnchor(

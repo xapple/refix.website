@@ -23,7 +23,8 @@ class _NavMenuState extends State<NavMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final accent = Theme.of(context).colorScheme.tertiary;
+    final colorScheme = Theme.of(context).colorScheme;
+    final accent = Color.lerp(colorScheme.primary, colorScheme.secondary, 0.5)!;
     final location = GoRouterState.of(context).uri.path;
 
     return MenuAnchor(
