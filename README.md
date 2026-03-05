@@ -24,8 +24,6 @@ To build the app do:
 
 # TODO
 
-* Fix the liquid glass pill effect at the bottom of the page showing the URL and move it to the device_wrapper package.
-* Publish a wrapper package for flutter that just does iPhone 16 pro realistic.
-* Add back buttons to the "Fonts" and "Colors" pages.
 * Work on the Hamburger menu.
+* Add back buttons to the "Fonts" and "Colors" pages.
 * Make the splash screen better and match it to the Figma design.
