@@ -10,24 +10,8 @@ void main() {
   runApp(const ProviderScope(child: RefixDemoShell()));
 }
 
-class RefixDemoShell extends StatelessWidget {
+class RefixDemoShell extends ConsumerWidget {
   const RefixDemoShell({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: IPhone16Wrapper(
-        urlBar: 'refix.website',
-        backgroundColor: const Color(0xFF1E1E1E),
-        child: const RefixApp(),
-      ),
-    );
-  }
-}
-
-class RefixApp extends ConsumerWidget {
-  const RefixApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,6 +25,11 @@ class RefixApp extends ConsumerWidget {
       darkTheme: themes.dark,
       themeMode: themeMode,
       routerConfig: appRouter,
+      builder: (context, child) => IPhone16Wrapper(
+        urlBar: 'refix.website',
+        backgroundColor: const Color(0xFF1E1E1E),
+        child: child ?? const SizedBox.shrink(),
+      ),
     );
   }
 }

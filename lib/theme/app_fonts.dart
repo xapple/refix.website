@@ -25,8 +25,15 @@ class AppFonts {
     'Nunito',
   ];
 
-  static TextTheme buildTextTheme(String titleFont, String bodyFont) {
-    final base = ThemeData.light().textTheme;
+  static TextTheme buildTextTheme(
+    Brightness brightness,
+    String titleFont,
+    String bodyFont,
+  ) {
+    final base = ThemeData(
+      useMaterial3: true,
+      brightness: brightness,
+    ).textTheme;
 
     TextStyle? titleStyle(TextStyle? style) =>
         GoogleFonts.getFont(titleFont, textStyle: style);

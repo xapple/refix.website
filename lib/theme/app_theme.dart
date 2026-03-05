@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'app_color_tokens.dart';
 import 'app_fonts.dart';
 import '../providers/color_providers.dart';
 import '../providers/font_providers.dart';
@@ -68,6 +69,9 @@ ThemeData _build(
   return ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    textTheme: AppFonts.buildTextTheme(titleFont, bodyFont),
+    textTheme: AppFonts.buildTextTheme(brightness, titleFont, bodyFont),
+    extensions: <ThemeExtension<dynamic>>[
+      AppColorTokens.fromColorScheme(colorScheme),
+    ],
   );
 }

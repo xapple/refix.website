@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_color_utilities/material_color_utilities.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
+import '../theme/app_color_tokens.dart';
 import '../theme/app_theme.dart';
 import 'brightness_toggle.dart';
 import 'language_picker.dart';
@@ -16,22 +16,17 @@ class TopBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final lightTheme = ref.watch(appThemeProvider).light;
     final cs = lightTheme.colorScheme;
+    final tokens = lightTheme.extension<AppColorTokens>()!;
     final accent = Color.lerp(cs.primary, cs.secondary, 0.5)!;
     final onAccent =
         ThemeData.estimateBrightnessForColor(accent) == Brightness.dark
         ? Colors.white
         : Colors.black;
-    final bg = Color(
-      TonalPalette.of(
-        Hct.fromInt(cs.secondary.toARGB32()).hue,
-        Hct.fromInt(cs.secondary.toARGB32()).chroma,
-      ).get(95),
-    );
 
     return Theme(
       data: lightTheme,
       child: ColoredBox(
-        color: bg,
+        color: tokens.topBarBackground,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           child: Row(

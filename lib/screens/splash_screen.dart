@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/top_bar.dart';
 
@@ -23,13 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
     final accent = cs.tertiary;
     final bg = cs.surfaceContainerLowest;
 
     final bottomPadding = MediaQuery.paddingOf(context).bottom;
 
-    return Scaffold(
+    return Scaffold( 
       backgroundColor: bg,
       drawer: const AppDrawer(),
       body: Stack(
@@ -44,94 +46,118 @@ class _SplashScreenState extends State<SplashScreen> {
               children: [
                 const TopBar(),
 
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        tokens.splashHeaderGradientTop,
+                        tokens.splashHeaderGradientBottom,
+                      ],
+                    ),
+                  ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(34, 16, 34, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Search bar
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(32),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.08),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: _searchController,
+                                style: text.bodyLarge,
+                                decoration: InputDecoration(
+                                  hintText: 'I want to fix my ...',
+                                  hintStyle: text.bodyLarge?.copyWith(
+                                    color: Colors.grey.shade400,
+                                  ),
+                                  suffixIcon: Padding(
+                                    padding: const EdgeInsets.only(right: 4),
+                                    child: Icon(
+                                      Icons.search,
+                                      color: accent,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
 
-                      // Search bar 
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.08),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
+                            // Subtitle
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Find a local repair man/women near you',
+                                textAlign: TextAlign.center,
+                                style: text.bodyLarge?.copyWith(
+                                  color: accent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Emergency mode toggle
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'Emergency mode',
+                                  style: text.bodyMedium?.copyWith(
+                                    color: cs.onSecondaryContainer,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Switch(
+                                  value: _emergencyMode,
+                                  onChanged: (val) =>
+                                      setState(() => _emergencyMode = val),
+                                  activeTrackColor: const Color(0xFF1A1A3A),
+                                  activeThumbColor: Colors.white,
+                                  inactiveThumbColor: Colors.white,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+
+                            // Tagline
+                            Text(
+                              "Don't trash it, fix it.",
+                              style: text.displaySmall?.copyWith(
+                                color: accent,
+                                fontWeight: FontWeight.bold,
+                                height: 1.1,
+                              ),
                             ),
                           ],
                         ),
-                        child: TextField(
-                          controller: _searchController,
-                          style: text.bodyLarge,
-                          decoration: InputDecoration(
-                            hintText: 'I want to fix my ...',
-                            hintStyle: text.bodyLarge?.copyWith(
-                              color: Colors.grey.shade400,
-                            ),
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 4),
-                              child: Icon(
-                                Icons.search,
-                                color: accent,
-                                size: 30,
-                              ),
-                            ),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 16,
-                            ),
-                          ),
-                        ),
                       ),
-                      const SizedBox(height: 10),
-
-                      // Subtitle
-                      Text(
-                        'Find a local repair man/women near you',
-                        style: text.bodyMedium?.copyWith(color: accent),
-                      ),
-                      const SizedBox(height: 8),
-
-                      // Emergency mode toggle
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Emergency mode',
-                            style: text.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Switch(
-                            value: _emergencyMode,
-                            onChanged: (val) =>
-                                setState(() => _emergencyMode = val),
-                            activeTrackColor: const Color(0xFF1A1A3A),
-                            activeThumbColor: Colors.white,
-                            inactiveThumbColor: Colors.white,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Tagline
-                      Text(
-                        "Don't trash it, fix it.",
-                        style: text.displaySmall?.copyWith(
-                          color: accent,
-                          fontWeight: FontWeight.bold,
-                          height: 1.1,
-                        ),
-                      ),
+                      const SizedBox(height: 5),
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
 
                 // Hero image
                 Image.asset(
@@ -141,34 +167,40 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
 
                 // Browse categories
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Browse categories',
-                        style: text.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: tokens.browseCategoriesBackground,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Browse categories',
+                          style: text.titleLarge?.copyWith(
+                            color: cs.onSecondaryContainer,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Material(
-                        color: const Color(0xFF1A1A3A),
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          customBorder: const CircleBorder(),
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.white,
-                              size: 28,
+                        const SizedBox(height: 12),
+                        Material(
+                          color: const Color(0xFF1A1A3A),
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            customBorder: const CircleBorder(),
+                            onTap: () {},
+                            child: const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.white,
+                                size: 28,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
 
