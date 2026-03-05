@@ -8,26 +8,29 @@ import '../providers/font_providers.dart';
 
 /// Derived provider — watches all theme state and returns both ThemeData variants.
 final appThemeProvider = Provider<({ThemeData light, ThemeData dark})>((ref) {
-  final primary = ref.watch(primaryColorProvider);
-  final secondary = ref.watch(secondaryColorProvider);
-  final tertiary = ref.watch(tertiaryColorProvider);
+  final lightPrimary = ref.watch(lightPrimaryColorProvider);
+  final lightSecondary = ref.watch(lightSecondaryColorProvider);
+  final lightTertiary = ref.watch(lightTertiaryColorProvider);
+  final darkPrimary = ref.watch(darkPrimaryColorProvider);
+  final darkSecondary = ref.watch(darkSecondaryColorProvider);
+  final darkTertiary = ref.watch(darkTertiaryColorProvider);
   final titleFont = ref.watch(titleFontProvider);
   final bodyFont = ref.watch(bodyFontProvider);
 
   return (
     light: _build(
       Brightness.light,
-      primary,
-      secondary,
-      tertiary,
+      lightPrimary,
+      lightSecondary,
+      lightTertiary,
       titleFont,
       bodyFont,
     ),
     dark: _build(
       Brightness.dark,
-      primary,
-      secondary,
-      tertiary,
+      darkPrimary,
+      darkSecondary,
+      darkTertiary,
       titleFont,
       bodyFont,
     ),

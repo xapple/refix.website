@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     final bottomPadding = MediaQuery.paddingOf(context).bottom;
 
-    return Scaffold( 
+    return Scaffold(
       backgroundColor: bg,
       drawer: const AppDrawer(),
       body: Stack(
@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             // Search bar
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: cs.surface,
                                 borderRadius: BorderRadius.circular(32),
                                 boxShadow: [
                                   BoxShadow(
@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 decoration: InputDecoration(
                                   hintText: 'I want to fix my ...',
                                   hintStyle: text.bodyLarge?.copyWith(
-                                    color: Colors.grey.shade400,
+                                    color: cs.onSurfaceVariant,
                                   ),
                                   suffixIcon: Padding(
                                     padding: const EdgeInsets.only(right: 4),
@@ -134,9 +134,6 @@ class _SplashScreenState extends State<SplashScreen> {
                                   value: _emergencyMode,
                                   onChanged: (val) =>
                                       setState(() => _emergencyMode = val),
-                                  activeTrackColor: const Color(0xFF1A1A3A),
-                                  activeThumbColor: Colors.white,
-                                  inactiveThumbColor: Colors.white,
                                 ),
                               ],
                             ),
@@ -184,16 +181,16 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                         const SizedBox(height: 12),
                         Material(
-                          color: const Color(0xFF1A1A3A),
+                          color: cs.primary,
                           shape: const CircleBorder(),
                           child: InkWell(
                             customBorder: const CircleBorder(),
                             onTap: () {},
-                            child: const Padding(
-                              padding: EdgeInsets.all(10),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
                               child: Icon(
                                 Icons.keyboard_arrow_down,
-                                color: Colors.white,
+                                color: cs.onPrimary,
                                 size: 28,
                               ),
                             ),

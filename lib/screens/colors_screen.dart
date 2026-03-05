@@ -13,26 +13,45 @@ class ColorsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final primary = ref.watch(primaryColorProvider);
-    final secondary = ref.watch(secondaryColorProvider);
-    final tertiary = ref.watch(tertiaryColorProvider);
+    final lightPrimary = ref.watch(lightPrimaryColorProvider);
+    final lightSecondary = ref.watch(lightSecondaryColorProvider);
+    final lightTertiary = ref.watch(lightTertiaryColorProvider);
+    final darkPrimary = ref.watch(darkPrimaryColorProvider);
+    final darkSecondary = ref.watch(darkSecondaryColorProvider);
+    final darkTertiary = ref.watch(darkTertiaryColorProvider);
 
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
 
-    final primaryPalette = SchemeTonalSpot(
-      sourceColorHct: Hct.fromInt(primary.toARGB32()),
+    final lightPrimaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(lightPrimary.toARGB32()),
       isDark: false,
       contrastLevel: 0,
     ).primaryPalette;
-    final secondaryPalette = SchemeTonalSpot(
-      sourceColorHct: Hct.fromInt(secondary.toARGB32()),
+    final lightSecondaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(lightSecondary.toARGB32()),
       isDark: false,
       contrastLevel: 0,
     ).primaryPalette;
-    final tertiaryPalette = SchemeTonalSpot(
-      sourceColorHct: Hct.fromInt(tertiary.toARGB32()),
+    final lightTertiaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(lightTertiary.toARGB32()),
       isDark: false,
+      contrastLevel: 0,
+    ).primaryPalette;
+
+    final darkPrimaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(darkPrimary.toARGB32()),
+      isDark: true,
+      contrastLevel: 0,
+    ).primaryPalette;
+    final darkSecondaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(darkSecondary.toARGB32()),
+      isDark: true,
+      contrastLevel: 0,
+    ).primaryPalette;
+    final darkTertiaryPalette = SchemeTonalSpot(
+      sourceColorHct: Hct.fromInt(darkTertiary.toARGB32()),
+      isDark: true,
       contrastLevel: 0,
     ).primaryPalette;
 
@@ -52,7 +71,10 @@ class ColorsScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Seed Colors', style: textTheme.headlineMedium),
+                      Text(
+                        'Light Theme Seed Colors',
+                        style: textTheme.headlineMedium,
+                      ),
                       const SizedBox(height: 16),
                       Wrap(
                         spacing: 12,
@@ -60,49 +82,109 @@ class ColorsScreen extends ConsumerWidget {
                         children: [
                           _ColorPickerCard(
                             label: 'Primary',
-                            color: primary,
-                            onChanged: (c) =>
-                                ref.read(primaryColorProvider.notifier).set(c),
+                            color: lightPrimary,
+                            onChanged: (c) => ref
+                                .read(lightPrimaryColorProvider.notifier)
+                                .set(c),
                           ),
                           _ColorPickerCard(
                             label: 'Secondary',
-                            color: secondary,
+                            color: lightSecondary,
                             onChanged: (c) => ref
-                                .read(secondaryColorProvider.notifier)
+                                .read(lightSecondaryColorProvider.notifier)
                                 .set(c),
                           ),
                           _ColorPickerCard(
                             label: 'Tertiary',
-                            color: tertiary,
-                            onChanged: (c) =>
-                                ref.read(tertiaryColorProvider.notifier).set(c),
+                            color: lightTertiary,
+                            onChanged: (c) => ref
+                                .read(lightTertiaryColorProvider.notifier)
+                                .set(c),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        'Dark Theme Seed Colors',
+                        style: textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 12),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 12,
+                        children: [
+                          _ColorPickerCard(
+                            label: 'Primary',
+                            color: darkPrimary,
+                            onChanged: (c) => ref
+                                .read(darkPrimaryColorProvider.notifier)
+                                .set(c),
+                          ),
+                          _ColorPickerCard(
+                            label: 'Secondary',
+                            color: darkSecondary,
+                            onChanged: (c) => ref
+                                .read(darkSecondaryColorProvider.notifier)
+                                .set(c),
+                          ),
+                          _ColorPickerCard(
+                            label: 'Tertiary',
+                            color: darkTertiary,
+                            onChanged: (c) => ref
+                                .read(darkTertiaryColorProvider.notifier)
+                                .set(c),
                           ),
                         ],
                       ),
                       const SizedBox(height: 40),
                       Text(
-                        'Generated Tonal Palettes (0–100)',
+                        'Generated Tonal Palettes (Light 0–100)',
                         style: textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Generated from your three seed colors.',
+                        'Generated from your three light-mode seed colors.',
                         style: textTheme.bodyLarge,
                       ),
                       const SizedBox(height: 24),
                       _PaletteStrip(
                         label: 'Primary',
-                        swatches: _swatches(primaryPalette),
+                        swatches: _swatches(lightPrimaryPalette),
                       ),
                       const SizedBox(height: 20),
                       _PaletteStrip(
                         label: 'Secondary',
-                        swatches: _swatches(secondaryPalette),
+                        swatches: _swatches(lightSecondaryPalette),
                       ),
                       const SizedBox(height: 20),
                       _PaletteStrip(
                         label: 'Tertiary',
-                        swatches: _swatches(tertiaryPalette),
+                        swatches: _swatches(lightTertiaryPalette),
+                      ),
+                      const SizedBox(height: 32),
+                      Text(
+                        'Generated Tonal Palettes (Dark 0–100)',
+                        style: textTheme.headlineSmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Generated from your three dark-mode seed colors.',
+                        style: textTheme.bodyLarge,
+                      ),
+                      const SizedBox(height: 24),
+                      _PaletteStrip(
+                        label: 'Primary',
+                        swatches: _swatches(darkPrimaryPalette),
+                      ),
+                      const SizedBox(height: 20),
+                      _PaletteStrip(
+                        label: 'Secondary',
+                        swatches: _swatches(darkSecondaryPalette),
+                      ),
+                      const SizedBox(height: 20),
+                      _PaletteStrip(
+                        label: 'Tertiary',
+                        swatches: _swatches(darkTertiaryPalette),
                       ),
                       const SizedBox(height: 40),
                       Text(
