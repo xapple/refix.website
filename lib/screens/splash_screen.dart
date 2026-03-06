@@ -65,16 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const TopBar(),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        tokens.splashHeaderGradientTop,
-                        tokens.splashHeaderGradientBottom,
-                      ],
-                    ),
-                  ),
+                  decoration: BoxDecoration(gradient: tokens.headerGradient),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -99,6 +90,8 @@ class _SplashScreenState extends State<SplashScreen> {
                               child: TextField(
                                 controller: _searchController,
                                 style: text.bodyLarge,
+                                textInputAction: TextInputAction.search,
+                                onSubmitted: (_) => context.go('/search'),
                                 decoration: InputDecoration(
                                   hintText: 'I want to fix my ...',
                                   hintStyle: text.bodyLarge?.copyWith(

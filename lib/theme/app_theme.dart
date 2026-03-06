@@ -73,8 +73,6 @@ ThemeData _build(
     useMaterial3: true,
     colorScheme: colorScheme,
     textTheme: AppFonts.buildTextTheme(brightness, titleFont, bodyFont),
-    extensions: <ThemeExtension<dynamic>>[
-      AppColorTokens.fromColorScheme(colorScheme),
-    ],
+    extensions: <ThemeExtension<dynamic>>[AppColorTokens(colorScheme)],
   );
 }

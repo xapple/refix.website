@@ -51,9 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
             // Search + filters section
             DecoratedBox(
-              decoration: BoxDecoration(
-                color: tokens.splashHeaderGradientBottom,
-              ),
+              decoration: BoxDecoration(color: tokens.searchBackground),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 20),
                 child: Column(
