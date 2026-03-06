@@ -73,7 +73,7 @@ class TopBar extends ConsumerWidget {
               const SizedBox(width: 10),
               // Profile
               IconButton.filled(
-                onPressed: () {},
+                onPressed: () => context.go('/profile'),
                 style: IconButton.styleFrom(
                   backgroundColor: tokens.interactiveAccent,
                 ),

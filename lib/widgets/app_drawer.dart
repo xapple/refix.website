@@ -26,6 +26,22 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
+              leading: Icon(Icons.search, color: cs.onSurface),
+              title: const Text('Search'),
+              onTap: () {
+                Navigator.of(context).pop();
+                context.go('/search');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person, color: cs.onSurface),
+              title: const Text('Profile'),
+              onTap: () {
+                Navigator.of(context).pop();
+                context.go('/profile');
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.palette, color: cs.onSurface),
               title: const Text('Colors'),
               onTap: () {

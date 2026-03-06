@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
@@ -105,10 +106,13 @@ class _SplashScreenState extends State<SplashScreen> {
                                   ),
                                   suffixIcon: Padding(
                                     padding: const EdgeInsets.only(right: 4),
-                                    child: Icon(
-                                      Icons.search,
-                                      color: accent,
-                                      size: 30,
+                                    child: IconButton(
+                                      onPressed: () => context.go('/search'),
+                                      icon: Icon(
+                                        Icons.search,
+                                        color: accent,
+                                        size: 30,
+                                      ),
                                     ),
                                   ),
                                   border: InputBorder.none,
@@ -258,7 +262,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ],
             ),
           ),
-        ], 
+        ],
       ),
     );
   }
@@ -302,7 +306,7 @@ class _CategoryCard extends StatelessWidget {
                   Icons.broken_image_outlined,
                   size: 44,
                   color: cs.onSurfaceVariant,
-                ), 
+                ),
               ),
             ),
           ),
@@ -314,7 +318,7 @@ class _CategoryCard extends StatelessWidget {
         ),
       ],
     );
-  } 
+  }
 }
 
 class _FooterLinkButton extends StatelessWidget {
@@ -346,9 +350,7 @@ class _FooterLinkButton extends StatelessWidget {
       child: Text(
         label,
         textAlign: textAlign,
-        style: text.bodyMedium?.copyWith(
-          decoration: TextDecoration.underline,
-        ),
+        style: text.bodyMedium?.copyWith(decoration: TextDecoration.underline),
       ),
     );
   }

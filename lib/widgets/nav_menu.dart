@@ -19,6 +19,8 @@ class _NavMenuState extends State<NavMenu> {
 
   static const _items = [
     (PhosphorIconsBold.house, 'Home', '/'),
+    (PhosphorIconsBold.magnifyingGlass, 'Search', '/search'),
+    (PhosphorIconsBold.user, 'Profile', '/profile'),
     (PhosphorIconsBold.palette, 'Colors', '/colors'),
     (PhosphorIconsBold.textAa, 'Fonts', '/fonts'),
   ];
