@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const TopBar(),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(gradient: tokens.testGradient),
+                  decoration: BoxDecoration(gradient: tokens.headerGradient),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [

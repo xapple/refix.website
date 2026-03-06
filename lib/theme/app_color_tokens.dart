@@ -22,13 +22,6 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
     colors: [_scheme.primaryContainer, _scheme.surfaceContainerHighest],
   );
 
-  // ── Gradient tokens ──
-  LinearGradient get testGradient => LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    colors: [_scheme.secondaryContainer, _scheme.onSecondaryContainer],
-  );
-
   // ── ThemeExtension plumbing ──
   @override
   AppColorTokens copyWith() => AppColorTokens(_scheme);

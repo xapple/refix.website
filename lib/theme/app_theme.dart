@@ -11,9 +11,13 @@ final appThemeProvider = Provider<({ThemeData light, ThemeData dark})>((ref) {
   final lightPrimary = ref.watch(lightPrimaryColorProvider);
   final lightSecondary = ref.watch(lightSecondaryColorProvider);
   final lightTertiary = ref.watch(lightTertiaryColorProvider);
-  final darkPrimary = ref.watch(darkPrimaryColorProvider);
-  final darkSecondary = ref.watch(darkSecondaryColorProvider);
-  final darkTertiary = ref.watch(darkTertiaryColorProvider);
+  final useLightSeeds = ref.watch(useLightSeedsForDarkProvider);
+  final darkPrimary =
+      useLightSeeds ? lightPrimary : ref.watch(darkPrimaryColorProvider);
+  final darkSecondary =
+      useLightSeeds ? lightSecondary : ref.watch(darkSecondaryColorProvider);
+  final darkTertiary =
+      useLightSeeds ? lightTertiary : ref.watch(darkTertiaryColorProvider);
   final titleFont = ref.watch(titleFontProvider);
   final bodyFont = ref.watch(bodyFontProvider);
 
