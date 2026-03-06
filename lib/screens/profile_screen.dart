@@ -5,6 +5,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../data/fake_data.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/dashed_divider.dart';
+import '../widgets/image_source.dart';
 import '../widgets/top_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -43,8 +44,8 @@ class ProfileScreen extends StatelessWidget {
                       // Avatar
                       ClipRRect(
                         borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          user.avatarUrl,
+                        child: Image(
+                          image: imageProviderFromSource(user.avatarUrl),
                           width: 110,
                           height: 130,
                           fit: BoxFit.cover,
@@ -261,8 +262,8 @@ class _ReservationCard extends StatelessWidget {
             // Craftsman avatar
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                c.avatarUrl,
+              child: Image(
+                image: imageProviderFromSource(c.avatarUrl),
                 width: 70,
                 height: 70,
                 fit: BoxFit.cover,

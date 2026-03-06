@@ -69,8 +69,7 @@ const fakeCraftsmen = [
     rating: 4.3,
     reviewCount: 45,
     specialties: ['Woodworking', 'Electricity'],
-    avatarUrl:
-        'https://images.unsplash.com/photo-1564429238961-bf8bb78af776?w=400&h=400&fit=crop',
+    avatarUrl: 'assets/profile_pics/horiz1.jpg',
     portfolioUrls: [
       'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop',
@@ -92,8 +91,7 @@ const fakeCraftsmen = [
     rating: 4.7,
     reviewCount: 13,
     specialties: ['Plumbing', 'Appliances', 'Bicycles'],
-    avatarUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop',
+    avatarUrl: 'assets/profile_pics/horiz2.jpg',
     portfolioUrls: [
       'https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=400&h=300&fit=crop',
@@ -112,8 +110,7 @@ const fakeCraftsmen = [
     rating: 5.0,
     reviewCount: 2,
     specialties: ['Furniture', 'Heating'],
-    avatarUrl:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+    avatarUrl: 'assets/profile_pics/horiz3.jpg',
     portfolioUrls: [
       'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400&h=300&fit=crop',
@@ -134,8 +131,7 @@ const fakeCraftsmen = [
     rating: 4.9,
     reviewCount: 87,
     specialties: ['Appliances', 'Electrical', 'Locks'],
-    avatarUrl:
-        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
+    avatarUrl: 'assets/profile_pics/vert.jpg',
     portfolioUrls: [
       'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop',
@@ -149,8 +145,7 @@ const fakeCraftsmen = [
 final fakeUser = UserProfile(
   name: 'Lucas Sinclair',
   memberSince: 'Sep. 2022',
-  avatarUrl:
-      'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop',
+  avatarUrl: 'assets/profile_pics/vert.jpg',
   reservations: [
     Reservation(
       craftsman: fakeCraftsmen[1],

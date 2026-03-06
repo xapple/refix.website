@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../data/fake_data.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/dashed_divider.dart';
+import '../widgets/image_source.dart';
 import '../widgets/top_bar.dart';
 
 class CraftsmanScreen extends StatelessWidget {
@@ -20,6 +21,9 @@ class CraftsmanScreen extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
     final bg = cs.surface;
+    final heroImageSource = isRemoteImageSource(craftsman.avatarUrl)
+        ? craftsman.avatarUrl.replaceAll('400&h=400', '800&h=600')
+        : craftsman.avatarUrl;
 
     return Scaffold(
       backgroundColor: bg,
@@ -38,8 +42,8 @@ class CraftsmanScreen extends StatelessWidget {
             // Hero image
             AspectRatio(
               aspectRatio: 4 / 3,
-              child: Image.network(
-                craftsman.avatarUrl.replaceAll('400&h=400', '800&h=600'),
+              child: Image(
+                image: imageProviderFromSource(heroImageSource),
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(
                   color: cs.primaryContainer,

@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../data/fake_data.dart';
 import '../widgets/app_drawer.dart';
+import '../widgets/image_source.dart';
 import '../widgets/top_bar.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -221,8 +222,8 @@ class _CraftsmanResultCard extends StatelessWidget {
                 // Avatar
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    craftsman.avatarUrl,
+                  child: Image(
+                    image: imageProviderFromSource(craftsman.avatarUrl),
                     width: 80,
                     height: 80,
                     fit: BoxFit.cover,
