@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../providers/theme_mode_provider.dart';
-import '../theme/app_color_tokens.dart';
 
 /// Icon button that toggles between light and dark mode.
 ///
@@ -23,6 +22,7 @@ class _BrightnessToggleState extends ConsumerState<BrightnessToggle> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final platformBrightness = MediaQuery.platformBrightnessOf(context);
 
     // Resync to system whenever the platform brightness changes.
@@ -42,12 +42,10 @@ class _BrightnessToggleState extends ConsumerState<BrightnessToggle> {
       ThemeMode.system => platformBrightness == Brightness.dark,
     };
 
-    final tokens = Theme.of(context).extension<AppColorTokens>()!;
-
     return IconButton(
       icon: PhosphorIcon(
         isDark ? PhosphorIconsBold.moon : PhosphorIconsBold.sun,
-        color: tokens.interactiveAccent,
+        color: cs.primary,
         size: widget.size,
       ),
       tooltip: isDark ? 'Dark mode' : 'Light mode',

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../data/fake_data.dart';
-import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/top_bar.dart';
 
@@ -31,9 +30,8 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
-    final bg = tokens.pageBackground;
+    final bg = cs.surface;
 
     return Scaffold(
       backgroundColor: bg,
@@ -51,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
             // Search + filters section
             DecoratedBox(
-              decoration: BoxDecoration(color: tokens.searchBackground),
+              decoration: BoxDecoration(color: cs.surfaceContainerHigh),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 20),
                 child: Column(
@@ -79,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         decoration: InputDecoration(
                           hintText: 'Search...',
                           hintStyle: text.bodyLarge?.copyWith(
-                            color: tokens.secondaryText,
+                            color: cs.onSurfaceVariant,
                           ),
                           suffixIcon: Container(
                             margin: const EdgeInsets.all(4),
@@ -115,8 +113,8 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                             label: const Text('Add Filter'),
                             style: OutlinedButton.styleFrom(
-                              backgroundColor: tokens.sectionBackground,
-                              foregroundColor: tokens.onSectionBackground,
+                              backgroundColor: cs.surfaceContainerLow,
+                              foregroundColor: cs.onSurface,
                               side: BorderSide(
                                 color: cs.outline.withValues(alpha: 0.3),
                               ),
@@ -208,7 +206,6 @@ class _CraftsmanResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
 
     return InkWell(
@@ -270,7 +267,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                             child: Text(
                               craftsman.location,
                               style: text.bodySmall?.copyWith(
-                                color: tokens.secondaryText,
+                                color: cs.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -279,7 +276,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                             child: Text(
                               'last seen ${craftsman.lastSeen}',
                               style: text.bodySmall?.copyWith(
-                                color: tokens.secondaryText,
+                                color: cs.onSurfaceVariant,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -303,7 +300,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                           Text(
                             '(${craftsman.reviewCount} reviews)',
                             style: text.bodySmall?.copyWith(
-                              color: tokens.secondaryText,
+                              color: cs.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -314,7 +311,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                       Text(
                         craftsman.specialties.join(', '),
                         style: text.bodySmall?.copyWith(
-                          color: tokens.secondaryText,
+                          color: cs.onSurfaceVariant,
                         ),
                       ),
                     ],

@@ -12,4 +12,10 @@ class AppColors {
   static const Color darkPrimary = Color(0xFFE07030);
   static const Color darkSecondary = Color(0xFFA05520);
   static const Color darkTertiary = Color(0xFFC03040);
+
+  static LinearGradient headerGradient(ColorScheme scheme) => LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [scheme.secondaryContainer, scheme.surfaceContainerHighest],
+  );
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../theme/app_color_tokens.dart';
+import '../theme/app_colors.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/top_bar.dart';
 
@@ -40,11 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final tokens = Theme.of(context).extension<AppColorTokens>()!;
+    final isLightMode = Theme.of(context).brightness == Brightness.light;
     final text = Theme.of(context).textTheme;
     final accent = cs.tertiary;
-    final bg = tokens.pageBackground;
-    final headerTextColor = tokens.onSectionBackground;
+    final bg = cs.surface;
+    final headerTextColor = cs.onSurface;
 
     final bottomPadding = MediaQuery.paddingOf(context).bottom;
 
@@ -65,7 +65,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 const TopBar(),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(gradient: tokens.headerGradient),
+                  decoration: BoxDecoration(
+                    color: isLightMode ? null : cs.surfaceContainerLow,
+                    gradient: isLightMode ? AppColors.headerGradient(cs) : null,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -95,7 +98,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 decoration: InputDecoration(
                                   hintText: 'I want to fix my ...',
                                   hintStyle: text.bodyLarge?.copyWith(
-                                    color: tokens.secondaryText,
+                                    color: cs.onSurfaceVariant,
                                   ),
                                   suffixIcon: Padding(
                                     padding: const EdgeInsets.only(right: 4),
@@ -179,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                 // Browse categories
                 DecoratedBox(
-                  decoration: BoxDecoration(color: tokens.sectionBackground),
+                  decoration: BoxDecoration(color: cs.surfaceContainerLow),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Column(
@@ -187,7 +190,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Text(
                           'Browse categories',
                           style: text.titleLarge?.copyWith(
-                            color: tokens.onSectionBackground,
+                            color: cs.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -195,8 +198,8 @@ class _SplashScreenState extends State<SplashScreen> {
                         IconButton.filled(
                           onPressed: _scrollToCategories,
                           style: IconButton.styleFrom(
-                            backgroundColor: tokens.interactiveAccent,
-                            foregroundColor: tokens.onInteractiveAccent,
+                            backgroundColor: cs.primary,
+                            foregroundColor: cs.onPrimary,
                           ),
                           iconSize: 28,
                           icon: const Icon(Icons.keyboard_arrow_down),
@@ -207,7 +210,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(color: tokens.sectionBackground),
+                  decoration: BoxDecoration(color: cs.surfaceContainerLow),
                   child: Padding(
                     key: _categoriesSectionKey,
                     padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
@@ -265,7 +268,6 @@ class _CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
 
     return Column(
@@ -295,7 +297,7 @@ class _CategoryCard extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) => Icon(
                   Icons.broken_image_outlined,
                   size: 44,
-                  color: tokens.secondaryText,
+                  color: cs.onSurfaceVariant,
                 ),
               ),
             ),
