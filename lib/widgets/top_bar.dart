@@ -16,6 +16,8 @@ class TopBar extends StatelessWidget {
     final logoAsset = isDarkMode
         ? 'assets/images/logo_dark.png'
         : 'assets/images/logo.png';
+    const logoFrameWidth = 140.0;
+    const logoFrameHeight = 40.0;
 
     return ColoredBox(
       color: cs.surfaceContainerLow,
@@ -26,7 +28,20 @@ class TopBar extends StatelessWidget {
             // Logo on the left — navigates home
             GestureDetector(
               onTap: () => context.go('/'),
-              child: Image.asset(logoAsset, height: 40),
+              child: SizedBox(
+                width: logoFrameWidth,
+                height: logoFrameHeight,
+                child: Image.asset(
+                  logoAsset,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.centerLeft,
+                  errorBuilder: (context, error, stackTrace) => Image.asset(
+                    'assets/images/logo.png',
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                  ),
+                ),
+              ),
             ),
             const Spacer(),
             // Brightness toggle

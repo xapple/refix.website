@@ -154,7 +154,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 14),
 
                             // Tagline
                             Text(
@@ -168,7 +168,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 2),
                     ],
                   ),
                 ),
