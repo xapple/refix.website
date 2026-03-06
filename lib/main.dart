@@ -26,10 +26,8 @@ class RefixDemoShell extends ConsumerWidget {
       themeMode: themeMode,
       routerConfig: appRouter,
       builder: (context, child) {
-        final shellBackground = Theme.of(context).colorScheme.surfaceDim;
         return IPhone16Wrapper(
           urlBar: 'refix.website',
-          backgroundColor: shellBackground,
           child: child ?? const SizedBox.shrink(),
         );
       },

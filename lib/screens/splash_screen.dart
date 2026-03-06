@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics_compat.dart'
-    show RenderingStrategy;
 
 import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
@@ -249,7 +247,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Center(
                           child: Text(
                             '© 2026 Lucas Sinclair',
-                            style: text.titleMedium,
+                            style: text.bodyMedium,
                           ),
                         ),
                       ],
@@ -259,7 +257,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ],
             ),
           ),
-        ],
+        ], 
       ),
     );
   }
@@ -294,7 +292,6 @@ class _CategoryCard extends StatelessWidget {
                 width: 76,
                 height: 76,
                 fit: BoxFit.contain,
-                renderingStrategy: RenderingStrategy.raster,
                 placeholderBuilder: (context) => const SizedBox(
                   width: 28,
                   height: 28,
@@ -348,7 +345,7 @@ class _FooterLinkButton extends StatelessWidget {
       child: Text(
         label,
         textAlign: textAlign,
-        style: text.headlineSmall?.copyWith(
+        style: text.bodyMedium?.copyWith(
           decoration: TextDecoration.underline,
         ),
       ),
@@ -362,7 +359,7 @@ class _FooterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final text = Theme.of(context).textTheme;
-    final contactStyle = text.titleMedium;
+    final contactStyle = text.bodyMedium;
     final leftLinks = <Widget>[
       const _FooterLinkButton(label: 'FAQ'),
       const SizedBox(height: 4),
@@ -391,33 +388,18 @@ class _FooterSection extends StatelessWidget {
       );
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth < 620) {
-          return Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ...leftLinks,
-              const SizedBox(height: 24),
-              rightColumn(align: TextAlign.start),
-            ],
-          );
-        }
-
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: leftLinks,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(child: rightColumn(align: TextAlign.end)),
-          ],
-        );
-      },
+            children: leftLinks,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(child: rightColumn(align: TextAlign.end)),
+      ],
     );
   }
 }
