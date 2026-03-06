@@ -53,9 +53,10 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: [
           SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             padding: EdgeInsets.only(
               top: MediaQuery.paddingOf(context).top,
-              bottom: bottomPadding + 72,
+              bottom: bottomPadding,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -301,7 +302,7 @@ class _CategoryCard extends StatelessWidget {
                   Icons.broken_image_outlined,
                   size: 44,
                   color: cs.onSurfaceVariant,
-                ),
+                ), 
               ),
             ),
           ),
@@ -313,7 +314,7 @@ class _CategoryCard extends StatelessWidget {
         ),
       ],
     );
-  }
+  } 
 }
 
 class _FooterLinkButton extends StatelessWidget {
