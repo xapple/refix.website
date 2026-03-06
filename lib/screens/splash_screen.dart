@@ -43,8 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
     final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
     final accent = cs.tertiary;
-    final bg = cs.surfaceContainerLowest;
-    final headerTextColor = cs.onSecondaryContainer;
+    final bg = tokens.pageBackground;
+    final headerTextColor = tokens.onSectionBackground;
 
     final bottomPadding = MediaQuery.paddingOf(context).bottom;
 
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 const TopBar(),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(gradient: tokens.headerGradient),
+                  decoration: BoxDecoration(gradient: tokens.testGradient),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -95,7 +95,7 @@ class _SplashScreenState extends State<SplashScreen> {
                                 decoration: InputDecoration(
                                   hintText: 'I want to fix my ...',
                                   hintStyle: text.bodyLarge?.copyWith(
-                                    color: cs.onSurfaceVariant,
+                                    color: tokens.secondaryText,
                                   ),
                                   suffixIcon: Padding(
                                     padding: const EdgeInsets.only(right: 4),
@@ -179,9 +179,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                 // Browse categories
                 DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: tokens.browseCategoriesBackground,
-                  ),
+                  decoration: BoxDecoration(color: tokens.sectionBackground),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Column(
@@ -189,7 +187,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Text(
                           'Browse categories',
                           style: text.titleLarge?.copyWith(
-                            color: cs.onSecondaryContainer,
+                            color: tokens.onSectionBackground,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -197,8 +195,8 @@ class _SplashScreenState extends State<SplashScreen> {
                         IconButton.filled(
                           onPressed: _scrollToCategories,
                           style: IconButton.styleFrom(
-                            backgroundColor: cs.primary,
-                            foregroundColor: cs.onPrimary,
+                            backgroundColor: tokens.interactiveAccent,
+                            foregroundColor: tokens.onInteractiveAccent,
                           ),
                           iconSize: 28,
                           icon: const Icon(Icons.keyboard_arrow_down),
@@ -209,9 +207,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
 
                 DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: tokens.browseCategoriesBackground,
-                  ),
+                  decoration: BoxDecoration(color: tokens.sectionBackground),
                   child: Padding(
                     key: _categoriesSectionKey,
                     padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
@@ -269,6 +265,7 @@ class _CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
 
     return Column(
@@ -298,7 +295,7 @@ class _CategoryCard extends StatelessWidget {
                 errorBuilder: (context, error, stackTrace) => Icon(
                   Icons.broken_image_outlined,
                   size: 44,
-                  color: cs.onSurfaceVariant,
+                  color: tokens.secondaryText,
                 ),
               ),
             ),

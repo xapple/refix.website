@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../data/fake_data.dart';
+import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/dashed_divider.dart';
 import '../widgets/top_bar.dart';
@@ -18,8 +19,9 @@ class CraftsmanScreen extends StatelessWidget {
       orElse: () => fakeCraftsmen.first,
     );
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
-    final bg = cs.surfaceContainerLowest;
+    final bg = tokens.pageBackground;
 
     return Scaffold(
       backgroundColor: bg,
@@ -77,14 +79,14 @@ class CraftsmanScreen extends StatelessWidget {
                             Text(
                               craftsman.location,
                               style: text.bodyMedium?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               craftsman.phone,
                               style: text.bodyMedium?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                           ],
@@ -97,14 +99,14 @@ class CraftsmanScreen extends StatelessWidget {
                             Text(
                               'last seen ${craftsman.lastSeen}',
                               style: text.bodySmall?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               'member since ${craftsman.memberSince}',
                               style: text.bodySmall?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                           ],
@@ -121,13 +123,13 @@ class CraftsmanScreen extends StatelessWidget {
                     children: craftsman.specialties.map((s) {
                       return Chip(
                         label: Text(s),
-                        backgroundColor: cs.secondaryContainer,
+                        backgroundColor: tokens.sectionBackground,
                         side: BorderSide.none,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         labelStyle: text.labelMedium?.copyWith(
-                          color: cs.onSecondaryContainer,
+                          color: tokens.onSectionBackground,
                         ),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         visualDensity: VisualDensity.compact,
@@ -149,7 +151,7 @@ class CraftsmanScreen extends StatelessWidget {
                   Text(
                     craftsman.bio,
                     style: text.bodyMedium?.copyWith(
-                      color: cs.onSurfaceVariant,
+                      color: tokens.secondaryText,
                       height: 1.5,
                     ),
                   ),
@@ -184,6 +186,7 @@ class _ReviewsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
     final maxCount = craftsman.ratingDistribution.values.fold(
       0,
@@ -252,7 +255,9 @@ class _ReviewsSection extends StatelessWidget {
                 children: [
                   Text(
                     'average',
-                    style: text.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+                    style: text.bodySmall?.copyWith(
+                      color: tokens.secondaryText,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -264,7 +269,9 @@ class _ReviewsSection extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     '${craftsman.reviewCount} reviews',
-                    style: text.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+                    style: text.bodySmall?.copyWith(
+                      color: tokens.secondaryText,
+                    ),
                   ),
                 ],
               ),
@@ -300,8 +307,9 @@ class _PortfolioSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = Theme.of(context).textTheme;
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
+    final text = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +338,7 @@ class _PortfolioSection extends StatelessWidget {
                   color: cs.surfaceContainerHighest,
                   child: Icon(
                     PhosphorIconsDuotone.image,
-                    color: cs.onSurfaceVariant,
+                    color: tokens.secondaryText,
                   ),
                 ),
               ),

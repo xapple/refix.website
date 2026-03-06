@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../data/fake_data.dart';
+import '../theme/app_color_tokens.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/dashed_divider.dart';
 import '../widgets/top_bar.dart';
@@ -14,8 +15,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = fakeUser;
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
-    final bg = cs.surfaceContainerLowest;
+    final bg = tokens.pageBackground;
 
     return Scaffold(
       backgroundColor: bg,
@@ -81,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                             Text(
                               'member since ${user.memberSince}',
                               style: text.bodyMedium?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                             const SizedBox(height: 14),
@@ -168,6 +170,7 @@ class _SmallActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
 
     return Align(
       alignment: Alignment.centerRight,
@@ -176,8 +179,8 @@ class _SmallActionButton extends StatelessWidget {
         icon: PhosphorIcon(icon, size: 18),
         label: Text(label),
         style: OutlinedButton.styleFrom(
-          backgroundColor: cs.secondaryContainer.withValues(alpha: 0.5),
-          foregroundColor: cs.onSecondaryContainer,
+          backgroundColor: tokens.sectionBackground.withValues(alpha: 0.5),
+          foregroundColor: tokens.onSectionBackground,
           side: BorderSide(color: cs.outline.withValues(alpha: 0.3)),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -204,6 +207,7 @@ class _WideButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
 
     return SizedBox(
@@ -213,8 +217,8 @@ class _WideButton extends StatelessWidget {
         icon: PhosphorIcon(icon, size: 22),
         label: Text(label),
         style: OutlinedButton.styleFrom(
-          backgroundColor: cs.secondaryContainer.withValues(alpha: 0.4),
-          foregroundColor: cs.onSecondaryContainer,
+          backgroundColor: tokens.sectionBackground.withValues(alpha: 0.4),
+          foregroundColor: tokens.onSectionBackground,
           side: BorderSide(color: cs.outline.withValues(alpha: 0.25)),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
@@ -235,6 +239,7 @@ class _ReservationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
     final c = reservation.craftsman;
 
@@ -313,13 +318,15 @@ class _ReservationCard extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     c.location,
-                    style: text.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+                    style: text.bodySmall?.copyWith(
+                      color: tokens.secondaryText,
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Booked for:',
                     style: text.bodySmall?.copyWith(
-                      color: cs.onSurfaceVariant,
+                      color: tokens.secondaryText,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

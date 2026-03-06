@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final cs = Theme.of(context).colorScheme;
     final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
-    final bg = cs.surfaceContainerLowest;
+    final bg = tokens.pageBackground;
 
     return Scaffold(
       backgroundColor: bg,
@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         decoration: InputDecoration(
                           hintText: 'Search...',
                           hintStyle: text.bodyLarge?.copyWith(
-                            color: cs.onSurfaceVariant,
+                            color: tokens.secondaryText,
                           ),
                           suffixIcon: Container(
                             margin: const EdgeInsets.all(4),
@@ -115,8 +115,8 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                             label: const Text('Add Filter'),
                             style: OutlinedButton.styleFrom(
-                              backgroundColor: cs.secondaryContainer,
-                              foregroundColor: cs.onSecondaryContainer,
+                              backgroundColor: tokens.sectionBackground,
+                              foregroundColor: tokens.onSectionBackground,
                               side: BorderSide(
                                 color: cs.outline.withValues(alpha: 0.3),
                               ),
@@ -208,6 +208,7 @@ class _CraftsmanResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
+    final tokens = Theme.of(context).extension<AppColorTokens>()!;
     final text = Theme.of(context).textTheme;
 
     return InkWell(
@@ -269,7 +270,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                             child: Text(
                               craftsman.location,
                               style: text.bodySmall?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                             ),
                           ),
@@ -278,7 +279,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                             child: Text(
                               'last seen ${craftsman.lastSeen}',
                               style: text.bodySmall?.copyWith(
-                                color: cs.onSurfaceVariant,
+                                color: tokens.secondaryText,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -302,7 +303,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                           Text(
                             '(${craftsman.reviewCount} reviews)',
                             style: text.bodySmall?.copyWith(
-                              color: cs.onSurfaceVariant,
+                              color: tokens.secondaryText,
                             ),
                           ),
                         ],
@@ -313,7 +314,7 @@ class _CraftsmanResultCard extends StatelessWidget {
                       Text(
                         craftsman.specialties.join(', '),
                         style: text.bodySmall?.copyWith(
-                          color: cs.onSurfaceVariant,
+                          color: tokens.secondaryText,
                         ),
                       ),
                     ],

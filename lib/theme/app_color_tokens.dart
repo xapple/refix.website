@@ -7,17 +7,26 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
   final ColorScheme _scheme;
 
   // ── Color tokens ──
-  Color get topBarBackground => _scheme.secondaryContainer;
+  Color get pageBackground => _scheme.surfaceContainerLowest;
+  Color get sectionBackground => _scheme.secondaryContainer;
+  Color get onSectionBackground => _scheme.onSecondaryContainer;
+  Color get secondaryText => _scheme.onSurfaceVariant;
   Color get interactiveAccent => _scheme.primary;
   Color get onInteractiveAccent => _scheme.onPrimary;
-  Color get browseCategoriesBackground => _scheme.secondaryContainer;
   Color get searchBackground => _scheme.surfaceContainerHighest;
 
   // ── Gradient tokens ──
   LinearGradient get headerGradient => LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [_scheme.secondaryContainer, _scheme.surfaceContainerHighest],
+    colors: [_scheme.primaryContainer, _scheme.surfaceContainerHighest],
+  );
+
+  // ── Gradient tokens ──
+  LinearGradient get testGradient => LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [_scheme.secondaryContainer, _scheme.onSecondaryContainer],
   );
 
   // ── ThemeExtension plumbing ──

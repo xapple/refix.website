@@ -21,7 +21,7 @@ class TopBar extends ConsumerWidget {
     return Theme(
       data: lightTheme,
       child: ColoredBox(
-        color: tokens.topBarBackground,
+        color: tokens.sectionBackground,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           child: Row(
