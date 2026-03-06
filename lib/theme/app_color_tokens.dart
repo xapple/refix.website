@@ -19,7 +19,7 @@ class AppColorTokens extends ThemeExtension<AppColorTokens> {
   LinearGradient get headerGradient => LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [_scheme.primaryContainer, _scheme.surfaceContainerHighest],
+    colors: [_scheme.secondaryContainer, _scheme.surfaceContainerHighest],
   );
 
   // ── ThemeExtension plumbing ──

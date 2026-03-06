@@ -28,10 +28,3 @@ final darkTertiaryColorProvider =
     NotifierProvider<SimpleNotifier<Color>, Color>(
       () => SimpleNotifier(AppColors.darkTertiary),
     );
-
-/// When true, the dark theme reuses the light seed colors
-/// (Material 3 still adjusts tones for dark brightness).
-final useLightSeedsForDarkProvider =
-    NotifierProvider<SimpleNotifier<bool>, bool>(
-      () => SimpleNotifier(false),
-    );
